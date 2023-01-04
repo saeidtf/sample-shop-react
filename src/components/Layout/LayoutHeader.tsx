@@ -16,10 +16,10 @@ const NavLinkStyle = styled(NavLink)(({ theme }) => ({
   color: theme.palette.common.black,
   transition: "color 0.3s ease-in-out",
   "&.active": {
-    color: theme.palette.secondary.main,
+    color: theme.palette.common.white,
   },
   "&:hover": {
-    color: theme.palette.secondary.main,
+    color: theme.palette.common.white,
   },
 }));
 
@@ -27,7 +27,7 @@ export default function LayoutHeader() {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
-    <AppBar position="sticky" color="primary" component={"nav"}>
+    <AppBar position="sticky" color="primary" component={"nav"} sx={{flexShrink:0}}>
       <Toolbar>
         <Typography variant="h6">Online Shop</Typography>
         <Box sx={{ flexGrow: 1 }} />
