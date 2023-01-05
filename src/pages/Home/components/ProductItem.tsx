@@ -1,13 +1,18 @@
 import {
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    CardHeader,
-    CardMedia,
-    Stack,
-    Typography
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Slide,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
+import React from "react";
+import { useState } from "react";
 
 type ProductItemProps = {
   product: {
@@ -19,16 +24,29 @@ type ProductItemProps = {
 };
 
 export const ProductItem = ({ product }: ProductItemProps) => {
-  const { id, name, price, image } = product;
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const [showActions, setShowActions] = useState(matches);
+  const { name, price, image } = product;  
+  const containerRef = React.useRef(null);
+
+  const handleToggleActions = () => {
+    if(!matches){
+      setShowActions((prev) => !prev);
+    }else{
+      setShowActions(true);
+    }
+  };
   return (
-    <Card key={id} sx={{px:2}} >
+    <Card
+      variant="outlined"
+      sx={{ my: 4 }}
+      onMouseEnter={handleToggleActions}
+      onMouseLeave={handleToggleActions}
+      ref={containerRef}
+    >
+      <CardMedia component="img" image={image} alt={name} />
       <CardHeader title={name} />
-      <CardMedia
-        component="img"
-        image={image}
-        alt={name}
-        sx={{ borderRadius: 4 }}
-      />
       <CardContent>
         <Stack
           direction="row"
@@ -44,9 +62,16 @@ export const ProductItem = ({ product }: ProductItemProps) => {
         </Stack>
       </CardContent>
       <CardActions>
-        <Button variant="contained" color="primary">
-          Add to cart
-        </Button>
+        <Slide direction="up" in={showActions} container={containerRef.current}>
+          <Stack direction="row" spacing={2}>
+            <Button variant="contained" color="primary" size="small">
+              Add to cart
+            </Button>
+            <Button variant="outlined" color="primary" size="small">
+              View detail
+            </Button>
+          </Stack>
+        </Slide>
       </CardActions>
     </Card>
   );

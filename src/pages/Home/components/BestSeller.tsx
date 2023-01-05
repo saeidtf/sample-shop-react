@@ -1,6 +1,4 @@
-import {
-  Box, Typography
-} from "@mui/material";
+import { Box, Card, CardContent, CardHeader, Typography } from "@mui/material";
 import CustomSlider from "../../../components/CustomSlider";
 import { ProductItem } from "./ProductItem";
 
@@ -43,27 +41,28 @@ const products = [
   },
 ];
 
-export const BestSeller = () => {
+type BestSellerProps = {
+  title: string;
+};
+export const BestSeller = ({ title }: BestSellerProps) => {
   var settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 2,        
+    slidesToScroll: 2,
   };
 
   return (
-    <Box mt={4}>
-      <Typography variant="h4" mb={4}>
-        Best Seller
-      </Typography>
-      <Box>
+    <Card variant="outlined" sx={{ my: 10 }}>
+      <CardHeader title={title} sx={{textAlign:'center'}}/>
+      <CardContent>
         <CustomSlider {...settings}>
-          {products.map((item, index) => (
-            <ProductItem key={index} product={item} />
+          {products.map((item) => (
+            <ProductItem key={item.id} product={item} />
           ))}
         </CustomSlider>
-      </Box>
-    </Box>
+      </CardContent>
+    </Card>
   );
 };

@@ -16,7 +16,7 @@ export default function Layout() {
         <Container maxWidth="xl" sx={{ flexGrow: 1 , flexShrink:0 }}>
           <Outlet />
         </Container>
-        <Box height={100} mt={8} p={4} bgcolor="primary.main" flexShrink={0}>
+        <Box height={100} mt={8} p={4} bgcolor="primary.light" flexShrink={0}>
           <Typography variant="body2" align="center">
             Footer
           </Typography>

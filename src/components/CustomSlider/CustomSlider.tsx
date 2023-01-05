@@ -50,6 +50,7 @@ export default function CustomSlider({
           padding: "0 10px",
           boxSizing: "border-box",
         },
+        p:2
       }}
     >
       <Slider responsive={combineResponsive} {...props}>
