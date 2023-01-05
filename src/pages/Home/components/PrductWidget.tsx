@@ -44,7 +44,7 @@ const products = [
 type BestSellerProps = {
   title: string;
 };
-export const BestSeller = ({ title }: BestSellerProps) => {
+export const PrductWidget = ({ title }: BestSellerProps) => {
   var settings = {
     dots: true,
     infinite: true,

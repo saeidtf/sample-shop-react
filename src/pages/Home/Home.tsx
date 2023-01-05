@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { AboutHome } from "./components/AboutHome";
 import AboutSmall from "./components/AboutSmall";
-import { BestSeller } from "./components/BestSeller";
+import { PrductWidget } from "./components/PrductWidget";
 import Slider from "./components/Slider";
 
 export default function Home() {
@@ -9,9 +9,9 @@ export default function Home() {
     <Box>
       <Slider />
       <AboutHome />
-      <BestSeller title="Best Seller" />
+      <PrductWidget title="Best Seller" />
       <AboutSmall />
-      <BestSeller title="New Product" />
+      <PrductWidget title="New Product" />
     </Box>
   );
 }
