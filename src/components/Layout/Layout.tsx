@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import LayoutHeader from "./LayoutHeader";
 export default function Layout() {
@@ -11,7 +11,7 @@ export default function Layout() {
         height: "100vh",
       }}
     >
-      <Box display="flex" flexDirection="column" alignItems={"stretch"} height="100%" gap={2}>
+      <Stack alignItems={"stretch"} height="100%" gap={2}>
         <LayoutHeader />
         <Container maxWidth="xl" sx={{ flexGrow: 1 , flexShrink:0 }}>
           <Outlet />
@@ -21,7 +21,7 @@ export default function Layout() {
             Footer
           </Typography>
         </Box>
-      </Box>
+      </Stack>
     </Box>
   );
 }
