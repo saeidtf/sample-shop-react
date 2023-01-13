@@ -1,7 +1,12 @@
-import { Box, Grid, Pagination } from "@mui/material";
+import { Box, Grid, Pagination, PaginationItem } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import ProductItem from "../../components/ProductItem";
 import useFetch from "../../hooks/useFetch";
 import ProductsSkelton from "./components/ProductsSkelton";
@@ -37,13 +42,6 @@ export default function Products() {
   } = useFetch<ProductDataType>(`/products?pageSize=${pagesize}&page=${page}`);
   const { rows, count } = data || ({} as ProductDataType["data"]);
 
-  const handleChangePage = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {    
-    router(`?page=${value}&pagesize=${pagesize}`);
-  };
-
   if (loading) return <ProductsSkelton />;
   if (isError) return <Box>Error</Box>;
 
@@ -59,8 +57,16 @@ export default function Products() {
       {count && count > pagesize && (
         <Pagination
           count={Math.ceil(count / pagesize)}
-          page={page}
-          onChange={handleChangePage}
+          page={page}          
+          showFirstButton
+          showLastButton
+          renderItem={(item) => (
+            <PaginationItem
+              {...item}
+              component={Link}
+              to={`?page=${item.page}&pagesize=${pagesize}`}
+            />
+          )}
         />
       )}
     </Stack>
