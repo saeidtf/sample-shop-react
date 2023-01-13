@@ -40,8 +40,7 @@ export default function Products() {
   const handleChangePage = (
     event: React.ChangeEvent<unknown>,
     value: number
-  ) => {
-    window.scrollTo(0, 0);
+  ) => {    
     router(`?page=${value}&pagesize=${pagesize}`);
   };
 
