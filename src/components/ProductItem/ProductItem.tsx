@@ -23,7 +23,7 @@ type ProductItemProps = {
   };
 };
 
-export const ProductItem = ({ product }: ProductItemProps) => {
+const ProductItem = ({ product }: ProductItemProps) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
   const [showActions, setShowActions] = useState(matches);
@@ -76,3 +76,6 @@ export const ProductItem = ({ product }: ProductItemProps) => {
     </Card>
   );
 };
+
+
+export default ProductItem;

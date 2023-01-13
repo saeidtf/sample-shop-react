@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
 import CustomSlider from "../../../components/CustomSlider";
-import { ProductItem } from "./ProductItem";
+import ProductItem  from "../../../components/ProductItem";
 
 export type Product={
   id: number;
