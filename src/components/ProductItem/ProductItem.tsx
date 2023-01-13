@@ -6,9 +6,7 @@ import {
   CardHeader,
   CardMedia,
   IconButton, Stack,
-  Typography,
-  useMediaQuery,
-  useTheme
+  Typography
 } from "@mui/material";
 import React from "react";
 import {
@@ -25,9 +23,8 @@ type ProductItemProps = {
   };
 };
 
-const ProductItem = ({ product }: ProductItemProps) => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
+const ProductItem = ({ product}: ProductItemProps) => {
+    
   const { name, price, thumbnail } = product;
   const containerRef = React.useRef(null);
 
