@@ -1,8 +1,11 @@
 import {
   AppBar,
+  Badge,
   Box,
   Button,
   Drawer,
+  IconButton,
+  Stack,
   styled,
   Toolbar,
   Typography,
@@ -10,6 +13,8 @@ import {
 import { useState } from "react";
 import { NavLink as NavLinkReact } from "react-router-dom";
 import MenuIcon from "../../assets/images/menu.png";
+import {FaShoppingCart} from 'react-icons/fa'
+import { useLayout } from "./Layout";
 
 const NavLink = styled(NavLinkReact)(({ theme }) => ({
   textDecoration: "none",
@@ -26,10 +31,19 @@ const NavLink = styled(NavLinkReact)(({ theme }) => ({
 export default function LayoutHeader() {
   const [openMenu, setOpenMenu] = useState(false);
 
+  const {cart} = useLayout();
+
   return (
     <AppBar position="sticky" color="primary" component={"nav"} sx={{flexShrink:0}}>
       <Toolbar>
-        <Typography variant="h6">Online Shop</Typography>
+        <Stack direction="row" alignItems="center" gap={2}>
+          <Typography variant="h6">Online Shop</Typography>
+          <IconButton color="inherit" size="large">
+            <Badge badgeContent={cart.length} color="secondary">
+              <FaShoppingCart size={20}/>
+            </Badge>
+          </IconButton>
+        </Stack>
         <Box sx={{ flexGrow: 1 }} />
         <Box gap={4} sx={{ display: { xs: "none", md: "flex" } }}>
           <NavLink to="/">Home</NavLink>

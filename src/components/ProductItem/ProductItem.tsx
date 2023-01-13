@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
+import { useLayout } from "../Layout";
 
 type ProductItemProps = {
   product: {
@@ -30,6 +31,8 @@ const ProductItem = ({ product }: ProductItemProps) => {
   const { name, price, image } = product;  
   const containerRef = React.useRef(null);
 
+  const {addToCart} = useLayout()
+
   const handleToggleActions = () => {
     if(!matches){
       setShowActions((prev) => !prev);
@@ -37,6 +40,17 @@ const ProductItem = ({ product }: ProductItemProps) => {
       setShowActions(true);
     }
   };
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: 1,      
+    });
+  };
+
   return (
     <Card
       variant="outlined"
@@ -57,14 +71,14 @@ const ProductItem = ({ product }: ProductItemProps) => {
             Price
           </Typography>
           <Typography variant="h6" color="primary">
-            ${price}
+            ${price.toLocaleString()}
           </Typography>
         </Stack>
       </CardContent>
       <CardActions>
         <Slide direction="up" in={showActions} container={containerRef.current}>
           <Stack direction="row" spacing={2}>
-            <Button variant="contained" color="primary" size="small">
+            <Button variant="contained" color="primary" size="small" onClick={handleAddToCart}>
               Add to cart
             </Button>
             <Button variant="outlined" color="primary" size="small">
