@@ -2,7 +2,7 @@ import React from "react";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box } from "@mui/material";
+import { Box, styled } from "@mui/material";
 
 type CustomSliderProps = Settings & {
   children: React.ReactNode;
@@ -33,6 +33,7 @@ const innerResponsive = [
   },
 ];
 
+
 export default function CustomSlider({
   children,
   responsive,
@@ -49,6 +50,13 @@ export default function CustomSlider({
         "& .slick-slide": {
           padding: "0 10px",
           boxSizing: "border-box",
+          height: "inherit  !important"
+        },
+        "& .slick-slide > div": {
+          height: "95%"
+        },
+        "& .slick-track": {
+          display: "flex !important",
         },
         p:2
       }}

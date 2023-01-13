@@ -3,16 +3,15 @@ import { AboutHome } from "./components/AboutHome";
 import AboutSmall from "./components/AboutSmall";
 import { PrductWidget } from "./components/PrductWidget";
 import Slider from "./components/Slider";
-import {products} from './mockData/products'
 
-export default function Home() {
+export default function Home() {  
   return (
     <Box>
       <Slider />
       <AboutHome />
-      <PrductWidget title="Best Seller" products={products}/>
+      <PrductWidget title="Best Seller" url="/products/bestSeller"/>
       <AboutSmall />
-      <PrductWidget title="New Product" products={products}/>
+      <PrductWidget title="New Product" url="/products/newest"/>
     </Box>
   );
 }

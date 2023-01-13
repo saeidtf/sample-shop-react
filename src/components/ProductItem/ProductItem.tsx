@@ -5,6 +5,7 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
+  IconButton,
   Slide,
   Stack,
   Typography,
@@ -13,6 +14,13 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
+import {
+  FaMinus,
+  FaMinusCircle,
+  FaPlus,
+  FaPlusCircle,
+  FaTrash,
+} from "react-icons/fa";
 import { useLayout } from "../Layout";
 
 type ProductItemProps = {
@@ -20,7 +28,7 @@ type ProductItemProps = {
     id: number;
     name: string;
     price: number;
-    image: string;
+    thumbnail: string;
   };
 };
 
@@ -28,16 +36,27 @@ const ProductItem = ({ product }: ProductItemProps) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
   const [showActions, setShowActions] = useState(matches);
-  const { name, price, image } = product;  
+  const { name, price, thumbnail } = product;
   const containerRef = React.useRef(null);
 
-  const {addToCart} = useLayout()
+  const { addToCart, updateCart, removeFromCart, cart } = useLayout();
+  const cartItem = cart.find((item) => item.id === product.id);
 
   const handleToggleActions = () => {
-    if(!matches){
+    if (!matches) {
       setShowActions((prev) => !prev);
-    }else{
+    } else {
       setShowActions(true);
+    }
+  };
+
+  const handelUpdateQuantity = () => {
+    if (!cartItem) return;
+
+    if (cartItem?.quantity < 2) {
+      removeFromCart(product.id);
+    } else {
+      updateCart(product.id, cartItem.quantity - 1);
     }
   };
 
@@ -46,26 +65,64 @@ const ProductItem = ({ product }: ProductItemProps) => {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image,
-      quantity: 1,      
+      image: product.thumbnail,
+      quantity: 1,
     });
+  };
+
+  const ActionButton = () => {
+    if (!cartItem) {
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={handleAddToCart}
+        >
+          Add to cart
+        </Button>
+      );
+    } else {
+      return (
+        <Stack direction="row" spacing={3}>
+          <IconButton onClick={handelUpdateQuantity} size="small">
+            {cartItem.quantity < 2 && <FaTrash />}
+            {cartItem.quantity > 1 && <FaMinus />}
+          </IconButton>
+          <Typography variant="h6" color="primary">
+            {cartItem.quantity}
+          </Typography>
+          <IconButton size="small" onClick={handleAddToCart}>
+            <FaPlus />
+          </IconButton>
+        </Stack>
+      );
+    }
   };
 
   return (
     <Card
       variant="outlined"
-      sx={{ my: 4 }}
+      sx={{
+        my: 4,
+        height: "100%",
+        "&.MuiCard-root": {
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        },
+      }}
       onMouseEnter={handleToggleActions}
       onMouseLeave={handleToggleActions}
       ref={containerRef}
     >
-      <CardMedia component="img" image={image} alt={name} />
+      <CardMedia component="img" image={thumbnail} alt={name} />
       <CardHeader title={name} />
       <CardContent>
         <Stack
           direction="row"
           justifyContent="space-between"
-          alignItems="center"
+          alignItems="center"          
         >
           <Typography variant="body1" color="text.secondary">
             Price
@@ -76,20 +133,15 @@ const ProductItem = ({ product }: ProductItemProps) => {
         </Stack>
       </CardContent>
       <CardActions>
-        <Slide direction="up" in={showActions} container={containerRef.current}>
-          <Stack direction="row" spacing={2}>
-            <Button variant="contained" color="primary" size="small" onClick={handleAddToCart}>
-              Add to cart
-            </Button>
-            <Button variant="outlined" color="primary" size="small">
-              View detail
-            </Button>
-          </Stack>
-        </Slide>
+        <Stack direction="row" spacing={6}>
+          <ActionButton />
+          <Button variant="outlined" color="primary" size="small">
+            View detail
+          </Button>
+        </Stack>
       </CardActions>
     </Card>
   );
 };
-
 
 export default ProductItem;

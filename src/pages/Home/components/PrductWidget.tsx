@@ -1,18 +1,29 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
 import CustomSlider from "../../../components/CustomSlider";
 import ProductItem  from "../../../components/ProductItem";
+import useFetch from "../../../hooks/useFetch";
 
 export type Product={
   id: number;
   name: string;
   price: number;
-  image: string;  
+  thumbnail: string;  
 }
+
+type ResponseType = {
+  data: Product[];
+  success: boolean;
+}
+
 type PrductWidgetProps = {
   title: string;
-  products?: Product[];  
+  url: string;
 };
-export const PrductWidget = ({ title , products = [] }: PrductWidgetProps) => {
+export const PrductWidget = ({ title , url }: PrductWidgetProps) => {
+
+  const {data,isError,loading} = useFetch<ResponseType>(url);
+  const products = data?.data || [];
+
   var settings = {
     dots: true,
     infinite: true,
