@@ -5,21 +5,14 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  IconButton,
-  Slide,
-  Stack,
+  IconButton, Stack,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@mui/material";
 import React from "react";
-import { useState } from "react";
 import {
-  FaMinus,
-  FaMinusCircle,
-  FaPlus,
-  FaPlusCircle,
-  FaTrash,
+  FaMinus, FaPlus, FaTrash
 } from "react-icons/fa";
 import { useLayout } from "../Layout";
 
@@ -35,20 +28,12 @@ type ProductItemProps = {
 const ProductItem = ({ product }: ProductItemProps) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
-  const [showActions, setShowActions] = useState(matches);
   const { name, price, thumbnail } = product;
   const containerRef = React.useRef(null);
 
   const { addToCart, updateCart, removeFromCart, cart } = useLayout();
   const cartItem = cart.find((item) => item.id === product.id);
 
-  const handleToggleActions = () => {
-    if (!matches) {
-      setShowActions((prev) => !prev);
-    } else {
-      setShowActions(true);
-    }
-  };
 
   const handelUpdateQuantity = () => {
     if (!cartItem) return;
@@ -112,8 +97,6 @@ const ProductItem = ({ product }: ProductItemProps) => {
           justifyContent: "space-between",
         },
       }}
-      onMouseEnter={handleToggleActions}
-      onMouseLeave={handleToggleActions}
       ref={containerRef}
     >
       <CardMedia component="img" image={thumbnail} alt={name} />
