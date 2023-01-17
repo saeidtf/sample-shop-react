@@ -18,8 +18,8 @@ const lightTheme = responsiveFontSizes(createTheme({
     borderRadius: 4,
   },
   typography: {
-    fontFamily: 'tahoma',
-  }
+    fontFamily: 'Arial, sans-serif , iraniansans',
+  },  
 }));
 
 const darkTheme = responsiveFontSizes(createTheme({    

@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'iraniansans';
+    src: url('../assets/fonts/IranianSans.eot');
+    src: url('../assets/fonts/IranianSans.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/IranianSans.woff2') format('woff2'),
+        url('../assets/fonts/IranianSans.woff') format('woff'),
+        url('../assets/fonts/IranianSans.ttf') format('truetype'),
+        url('../assets/fonts/IranianSans.svg#IranianSans') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

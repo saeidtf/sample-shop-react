@@ -3,18 +3,22 @@ import {
   Badge,
   Box,
   Button,
+  ButtonGroup,
   Drawer,
   IconButton,
   Stack,
   styled,
+  ToggleButton,
+  ToggleButtonGroup,
   Toolbar,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { NavLink as NavLinkReact } from "react-router-dom";
 import MenuIcon from "../../assets/images/menu.png";
-import {FaShoppingCart} from 'react-icons/fa'
+import { FaShoppingCart } from "react-icons/fa";
 import { useLayout } from "./Layout";
+import { useTheme } from "../../themes";
 
 const NavLink = styled(NavLinkReact)(({ theme }) => ({
   textDecoration: "none",
@@ -31,18 +35,38 @@ const NavLink = styled(NavLinkReact)(({ theme }) => ({
 export default function LayoutHeader() {
   const [openMenu, setOpenMenu] = useState(false);
 
-  const {cart} = useLayout();
+  const { cart } = useLayout();
+  const { language, setLanguage } = useTheme();
 
   return (
-    <AppBar position="sticky" color="primary" component={"nav"} sx={{flexShrink:0}}>
+    <AppBar
+      position="sticky"
+      color="primary"
+      component={"nav"}
+      sx={{ flexShrink: 0 }}
+    >
       <Toolbar>
         <Stack direction="row" alignItems="center" gap={2}>
           <Typography variant="h6">Online Shop</Typography>
           <IconButton color="inherit" size="large">
             <Badge badgeContent={cart.length} color="secondary">
-              <FaShoppingCart size={20}/>
+              <FaShoppingCart size={20} />
             </Badge>
           </IconButton>
+          <ToggleButtonGroup
+            value={language.language}
+            exclusive
+            onChange={(e, value) => {
+              setLanguage({
+                language: value as "en" | "fa",
+                direction: value === "en" ? "ltr" : "rtl",
+              });
+            }}
+            size="small"
+          >
+             <ToggleButton value="en" >En</ToggleButton>
+             <ToggleButton value="fa" >Fa</ToggleButton>
+          </ToggleButtonGroup>
         </Stack>
         <Box sx={{ flexGrow: 1 }} />
         <Box gap={4} sx={{ display: { xs: "none", md: "flex" } }}>
@@ -59,15 +83,22 @@ export default function LayoutHeader() {
           >
             <img src={MenuIcon} alt="menu" style={{ width: 30 }} />
           </Button>
-          <Drawer            
+          <Drawer
             anchor="right"
             open={openMenu}
             onClose={() => setOpenMenu(false)}
           >
-            <Box sx={{ width: 250, height:'100vh' , backgroundColor:"primary.main" }} role="presentation">
+            <Box
+              sx={{
+                width: 250,
+                height: "100vh",
+                backgroundColor: "primary.main",
+              }}
+              role="presentation"
+            >
               <Box
                 sx={{ display: "flex", flexDirection: "column", gap: 2, p: 2 }}
-                onClick={()=>setOpenMenu(false)}
+                onClick={() => setOpenMenu(false)}
               >
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/products">Products</NavLink>
