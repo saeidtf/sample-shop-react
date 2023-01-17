@@ -3,6 +3,7 @@ import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, styled } from "@mui/material";
+import { useTheme } from "../../themes";
 
 type CustomSliderProps = Settings & {
   children: React.ReactNode;
@@ -33,16 +34,19 @@ const innerResponsive = [
   },
 ];
 
-
 export default function CustomSlider({
   children,
   responsive,
   isResponsive = true,
   ...props
 }: CustomSliderProps) {
+  const { language } = useTheme();
+
   const combineResponsive = isResponsive
     ? [...innerResponsive, ...(responsive || [])]
     : undefined;
+
+  props.rtl = language.direction === "rtl";
 
   return (
     <Box
@@ -50,15 +54,15 @@ export default function CustomSlider({
         "& .slick-slide": {
           padding: "0 10px",
           boxSizing: "border-box",
-          height: "inherit  !important"
+          height: "inherit  !important",
         },
         "& .slick-slide > div": {
-          height: "95%"
+          height: "95%",
         },
         "& .slick-track": {
           display: "flex !important",
         },
-        p:2
+        p: 2,
       }}
     >
       <Slider responsive={combineResponsive} {...props}>
