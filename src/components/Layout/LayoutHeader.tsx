@@ -36,7 +36,7 @@ export default function LayoutHeader() {
   const [openMenu, setOpenMenu] = useState(false);
 
   const { cart } = useLayout();
-  const { language, setLanguage } = useTheme();
+  const { language, changeLanguage } = useTheme();
 
   return (
     <AppBar
@@ -57,7 +57,7 @@ export default function LayoutHeader() {
             value={language.language}
             exclusive
             onChange={(e, value) => {
-              setLanguage({
+              changeLanguage({
                 language: value as "en" | "fa",
                 direction: value === "en" ? "ltr" : "rtl",
               });

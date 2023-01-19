@@ -13,7 +13,7 @@ type ThemeContextType = {
   theme: "light" | "dark";
   setTheme: (theme: "light" | "dark") => void;
   language: LanguageContextType;
-  setLanguage: (language: LanguageContextType) => void;
+  changeLanguage: (language: LanguageContextType) => void;
 };
 
 export type LanguageContextType = {
@@ -30,13 +30,15 @@ export function useTheme() {
 }
 
 
-
 export default function CustomThemeProvider(props: PropsType) {
+  const saveLanguage = localStorage.getItem("language") || JSON.stringify({language:'en',direction:'ltr'})  
   const [themMode, setThemMode] = useState<"light" | "dark">("light");
-  const [language, setLanguage] = useState<LanguageContextType>({
-    language: "en",
-    direction: "ltr",
-  })
+  const [language, setLanguage] = useState<LanguageContextType>(JSON.parse(saveLanguage))
+
+  const changeLanguage =(value:LanguageContextType) =>{
+    setLanguage(value)
+    localStorage.setItem("language", JSON.stringify(value))
+  }
   
   darkTheme.direction = language.direction;
   lightTheme.direction = language.direction;
@@ -47,7 +49,7 @@ export default function CustomThemeProvider(props: PropsType) {
         theme: themMode,
         setTheme: setThemMode,
         language,
-        setLanguage,
+        changeLanguage,
       }}
     >
       <ThemeProvider theme={themMode === "dark" ? darkTheme : lightTheme}>
