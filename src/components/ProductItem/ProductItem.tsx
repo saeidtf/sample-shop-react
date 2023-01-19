@@ -71,7 +71,7 @@ const ProductItem = ({ product}: ProductItemProps) => {
             {cartItem.quantity < 2 && <FaTrash />}
             {cartItem.quantity > 1 && <FaMinus />}
           </IconButton>
-          <Typography variant="h6" color="primary">
+          <Typography variant="h6" color="primary" sx={{width:30, textAlign:'center'}}>
             {cartItem.quantity}
           </Typography>
           <IconButton size="small" onClick={handleAddToCart}>

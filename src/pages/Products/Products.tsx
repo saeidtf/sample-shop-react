@@ -1,11 +1,7 @@
 import { Box, Grid, Pagination, PaginationItem } from "@mui/material";
 import { Stack } from "@mui/system";
-import React, { useEffect, useState } from "react";
 import {
-  Link,
-  useLocation,
-  useNavigate,
-  useSearchParams,
+  Link, useSearchParams
 } from "react-router-dom";
 import ProductItem from "../../components/ProductItem";
 import useFetch from "../../hooks/useFetch";
@@ -30,7 +26,6 @@ type ProductDataType = {
 };
 
 export default function Products() {
-  const router = useNavigate();
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const pagesize = Number(searchParams.get("pagesize")) || 12;

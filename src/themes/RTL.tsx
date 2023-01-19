@@ -1,12 +1,9 @@
-import rtlPlugin from "stylis-plugin-rtl";
-import { CacheProvider } from "@emotion/react";
-import createCache from "@emotion/cache";
-import { prefixer } from "stylis";
+import { create } from 'jss';
+import rtl from 'jss-rtl';
+import { StylesProvider, jssPreset } from '@mui/styles';
 
-// Create rtl cache
-const cacheRtl = createCache({
-  key: "muirtl",
-  stylisPlugins: [prefixer, rtlPlugin],
+const jss = create({
+  plugins: [...jssPreset().plugins, rtl()],
 });
 
 type RTLProps = {
@@ -16,7 +13,7 @@ type RTLProps = {
 
 function RTL(props: RTLProps) {
   if (props.isRtl) {
-    return <CacheProvider value={cacheRtl}>{props.children}</CacheProvider>;
+    return <StylesProvider jss={jss}>{props.children}</StylesProvider>;
   }
   return <>{props.children}</>;
 }
