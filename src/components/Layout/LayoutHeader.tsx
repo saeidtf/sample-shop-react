@@ -2,23 +2,21 @@ import {
   AppBar,
   Badge,
   Box,
-  Button,
-  ButtonGroup,
-  Drawer,
+  Button, Drawer,
   IconButton,
   Stack,
   styled,
   ToggleButton,
   ToggleButtonGroup,
   Toolbar,
-  Typography,
+  Typography
 } from "@mui/material";
 import { useState } from "react";
+import { FaShoppingCart } from "react-icons/fa";
 import { NavLink as NavLinkReact } from "react-router-dom";
 import MenuIcon from "../../assets/images/menu.png";
-import { FaShoppingCart } from "react-icons/fa";
-import { useLayout } from "./Layout";
 import { useTheme } from "../../themes";
+import { useLayout } from "./Layout";
 
 const NavLink = styled(NavLinkReact)(({ theme }) => ({
   textDecoration: "none",

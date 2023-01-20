@@ -1,0 +1,312 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 debug pnpm:package-manifest": {
+    "initial": {
+      "name": "my-app",
+      "version": "0.1.0",
+      "private": true,
+      "dependencies": {
+        "@emotion/react": "^11.10.5",
+        "@emotion/styled": "^11.10.5",
+        "@mui/material": "^5.11.2",
+        "@mui/styles": "^5.11.2",
+        "@reduxjs/toolkit": "^1.9.1",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "@types/jest": "^27.5.2",
+        "@types/node": "^16.18.4",
+        "@types/react": "^18.0.25",
+        "@types/react-dom": "^18.0.9",
+        "@types/react-redux": "^7.1.24",
+        "@types/react-slick": "^0.23.10",
+        "@types/stylis": "^4.0.2",
+        "jss": "^10.9.2",
+        "jss-rtl": "^0.3.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-icons": "^4.7.1",
+        "react-redux": "^8.0.5",
+        "react-router-dom": "^6.6.0",
+        "react-scripts": "5.0.1",
+        "react-slick": "^0.29.0",
+        "slick-carousel": "^1.8.1",
+        "stylis": "^4.1.3",
+        "typescript": "^4.9.3",
+        "web-vitals": "^2.1.4",
+        "zustand": "^4.3.2"
+      },
+      "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+      },
+      "eslintConfig": {
+        "extends": [
+          "react-app",
+          "react-app/jest"
+        ]
+      },
+      "browserslist": {
+        "production": [
+          ">0.2%",
+          "not dead",
+          "not op_mini all"
+        ],
+        "development": [
+          "last 1 chrome version",
+          "last 1 firefox version",
+          "last 1 safari version"
+        ]
+      }
+    },
+    "prefix": "C:\\Users\\saeidtf\\Desktop\\react\\my-app"
+  },
+  "2 debug pnpm:context": {
+    "currentLockfileExists": false,
+    "storeDir": "C:\\Users\\saeidtf\\.pnpm-store\\v3",
+    "virtualStoreDir": "C:\\Users\\saeidtf\\Desktop\\react\\my-app\\node_modules\\.pnpm"
+  },
+  "3 debug pnpm:stage": {
+    "prefix": "C:\\Users\\saeidtf\\Desktop\\react\\my-app",
+    "stage": "resolution_started"
+  },
+  "4 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ECONNRESET",
+      "code": "ECONNRESET",
+      "erroredSysCall": "read"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@mui%2Fstyles"
+  },
+  "5 error pnpm": {
+    "code": "ERR_PNPM_META_FETCH_FAIL",
+    "attempts": 1,
+    "err": {
+      "name": "Error",
+      "message": "GET https://registry.npmjs.org/pnpm: request to https://registry.npmjs.org/pnpm failed, reason: read ECONNRESET",
+      "code": "ERR_PNPM_META_FETCH_FAIL",
+      "stack": "Error: GET https://registry.npmjs.org/pnpm: request to https://registry.npmjs.org/pnpm failed, reason: read ECONNRESET\n    at RetryOperation._fn (C:\\Users\\saeidtf\\AppData\\Roaming\\nvm\\v16.17.0\\node_modules\\pnpm\\dist\\pnpm.cjs:85655:19)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"
+    }
+  },
+  "6 debug pnpm": "Using cached meta from C:\\Users\\saeidtf\\AppData\\Local\\pnpm-cache\\metadata\\registry.npmjs.org\\pnpm.json",
+  "7 debug pnpm:update-check": {
+    "currentVersion": "6.31.0",
+    "latestVersion": "7.25.0"
+  },
+  "8 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ECONNRESET",
+      "code": "ECONNRESET",
+      "erroredSysCall": "read"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@testing-library%2Fuser-event"
+  },
+  "9 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ECONNRESET",
+      "code": "ECONNRESET",
+      "erroredSysCall": "read"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@types%2Freact"
+  },
+  "10 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ECONNRESET",
+      "code": "ECONNRESET",
+      "erroredSysCall": "read"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@types%2Freact-slick"
+  },
+  "11 debug pnpm:request-retry": {
+    "attempt": 2,
+    "error": {
+      "type": "system",
+      "errno": "ECONNRESET",
+      "code": "ECONNRESET",
+      "erroredSysCall": "read"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 60000,
+    "url": "https://registry.npmjs.org/@types%2Freact-slick"
+  },
+  "12 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@emotion%2Freact"
+  },
+  "13 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@emotion%2Fstyled"
+  },
+  "14 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@reduxjs%2Ftoolkit"
+  },
+  "15 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@mui%2Fmaterial"
+  },
+  "16 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@testing-library%2Freact"
+  },
+  "17 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@testing-library%2Fjest-dom"
+  },
+  "18 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@types%2Fjest"
+  },
+  "19 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@types%2Fnode"
+  },
+  "20 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@types%2Freact-dom"
+  },
+  "21 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@types%2Fstylis"
+  },
+  "22 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/@types%2Freact-redux"
+  },
+  "23 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "type": "system",
+      "errno": "ERR_SOCKET_TIMEOUT",
+      "code": "ERR_SOCKET_TIMEOUT"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/jss"
+  },
+  "24 error pnpm": {
+    "code": "ERR_PNPM_META_FETCH_FAIL",
+    "attempts": 1,
+    "pkgsStack": [],
+    "err": {
+      "name": "pnpm",
+      "message": "GET https://registry.npmjs.org/@types%2Freact-slick: request to https://registry.npmjs.org/@types%2Freact-slick failed, reason: read ECONNRESET",
+      "code": "ERR_PNPM_META_FETCH_FAIL",
+      "stack": "pnpm: GET https://registry.npmjs.org/@types%2Freact-slick: request to https://registry.npmjs.org/@types%2Freact-slick failed, reason: read ECONNRESET\n    at RetryOperation._fn (C:\\Users\\saeidtf\\AppData\\Roaming\\nvm\\v16.17.0\\node_modules\\pnpm\\dist\\pnpm.cjs:85655:19)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"
+    }
+  }
+}

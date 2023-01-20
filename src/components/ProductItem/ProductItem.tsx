@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -61,12 +62,12 @@ const ProductItem = ({ product}: ProductItemProps) => {
           size="small"
           onClick={handleAddToCart}
         >
-          Add to cart
+          Add
         </Button>
       );
     } else {
       return (
-        <Stack direction="row" spacing={3}>
+        <Box display="flex" gap={3}>
           <IconButton onClick={handelUpdateQuantity} size="small">
             {cartItem.quantity < 2 && <FaTrash />}
             {cartItem.quantity > 1 && <FaMinus />}
@@ -77,7 +78,7 @@ const ProductItem = ({ product}: ProductItemProps) => {
           <IconButton size="small" onClick={handleAddToCart}>
             <FaPlus />
           </IconButton>
-        </Stack>
+        </Box>
       );
     }
   };
@@ -113,12 +114,12 @@ const ProductItem = ({ product}: ProductItemProps) => {
         </Stack>
       </CardContent>
       <CardActions>
-        <Stack direction="row" spacing={6}>
+        <Box display="flex" gap={3}>
           <ActionButton />
           <Button variant="outlined" color="primary" size="small">
-            View detail
+            View
           </Button>
-        </Stack>
+        </Box>
       </CardActions>
     </Card>
   );

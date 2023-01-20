@@ -14,6 +14,7 @@ const lightTheme = responsiveFontSizes(createTheme({
     },
   },
   spacing: 4,  
+  direction: 'rtl',
   shape: {
     borderRadius: 4,
   },

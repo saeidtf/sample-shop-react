@@ -1,9 +1,8 @@
-import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import RTL from "./RTL";
-import { lightTheme, darkTheme } from "./theme";
+import { darkTheme, lightTheme } from "./theme";
 
 type PropsType = {
   children: React.ReactNode;
@@ -48,9 +47,6 @@ export default function CustomThemeProvider(props: PropsType) {
     localStorage.setItem("language", JSON.stringify(value));
   };
 
-  darkTheme.direction = language.direction;
-  lightTheme.direction = language.direction;
-
   return (
     <ThemeContext.Provider
       value={{
@@ -61,8 +57,10 @@ export default function CustomThemeProvider(props: PropsType) {
       }}
     >
       <ThemeProvider theme={themMode === "dark" ? darkTheme : lightTheme}>
-        <CssBaseline />
-        <RTL isRtl={language.direction === "rtl"}>{props.children}</RTL>
+        <RTL isRtl={language.direction === "rtl"}>
+          <CssBaseline />
+          {props.children}
+        </RTL>
       </ThemeProvider>
     </ThemeContext.Provider>
   );

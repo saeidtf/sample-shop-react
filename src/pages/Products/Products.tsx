@@ -1,5 +1,5 @@
 import { Box, Grid, Pagination, PaginationItem } from "@mui/material";
-import { Stack } from "@mui/system";
+import { Stack } from "@mui/material";
 import {
   Link, useSearchParams
 } from "react-router-dom";
