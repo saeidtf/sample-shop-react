@@ -6,13 +6,13 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  IconButton, Stack,
-  Typography
+  IconButton,
+  Stack,
+  Typography,
 } from "@mui/material";
 import React from "react";
-import {
-  FaMinus, FaPlus, FaTrash
-} from "react-icons/fa";
+import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
+import { useTheme } from "../../themes";
 import { useLayout } from "../Layout";
 
 type ProductItemProps = {
@@ -24,14 +24,12 @@ type ProductItemProps = {
   };
 };
 
-const ProductItem = ({ product}: ProductItemProps) => {
-    
+const ProductItem = ({ product }: ProductItemProps) => {
   const { name, price, thumbnail } = product;
   const containerRef = React.useRef(null);
 
   const { addToCart, updateCart, removeFromCart, cart } = useLayout();
   const cartItem = cart.find((item) => item.id === product.id);
-
 
   const handelUpdateQuantity = () => {
     if (!cartItem) return;
@@ -72,7 +70,11 @@ const ProductItem = ({ product}: ProductItemProps) => {
             {cartItem.quantity < 2 && <FaTrash />}
             {cartItem.quantity > 1 && <FaMinus />}
           </IconButton>
-          <Typography variant="h6" color="primary" sx={{width:30, textAlign:'center'}}>
+          <Typography
+            variant="h6"
+            color="primary"
+            sx={{ width: 30, textAlign: "center" }}
+          >
             {cartItem.quantity}
           </Typography>
           <IconButton size="small" onClick={handleAddToCart}>
@@ -83,8 +85,10 @@ const ProductItem = ({ product}: ProductItemProps) => {
     }
   };
 
+  const { language } = useTheme();
   return (
     <Card
+      dir={language.direction === "rtl" ? "rtl" : "ltr"}
       variant="outlined"
       sx={{
         my: 4,
@@ -103,7 +107,7 @@ const ProductItem = ({ product}: ProductItemProps) => {
         <Stack
           direction="row"
           justifyContent="space-between"
-          alignItems="center"          
+          alignItems="center"
         >
           <Typography variant="body1" color="text.secondary">
             Price
