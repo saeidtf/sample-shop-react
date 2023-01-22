@@ -4,20 +4,25 @@ import { Outlet } from "react-router-dom";
 import useLayoutContext, { CartType } from "../../hooks/useLayoutContext";
 import LayoutHeader from "./LayoutHeader";
 
+
 type LayoutContextType = {
-  cart:CartType[],
+  cart: CartType[];
   addToCart: (product: CartType) => void;
   removeFromCart: (id: number) => void;
-  updateCart: (id: number, quantity: number) => void;  
+  updateCart: (id: number, quantity: number) => void;
 };
 
-const LayoutContext = React.createContext<LayoutContextType>({} as LayoutContextType);
+const LayoutContext = React.createContext<LayoutContextType>(
+  {} as LayoutContextType
+);
 export const useLayout = () => React.useContext(LayoutContext);
 
-export default function Layout() {
-  const value = useLayoutContext();
+export default function Layout() {  
+  const value = useLayoutContext();    
+
   return (
     <LayoutContext.Provider value={value}>
+      
       <Box
         sx={{
           maxWidth: "100%",
@@ -28,6 +33,7 @@ export default function Layout() {
       >
         <Stack alignItems={"stretch"} height="100%" gap={2}>
           <LayoutHeader />
+
           <Container maxWidth="xl" sx={{ flexGrow: 1, flexShrink: 0 }}>
             <Outlet />
           </Container>

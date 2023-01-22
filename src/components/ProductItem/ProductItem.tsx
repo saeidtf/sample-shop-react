@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Card,
   CardActions,
@@ -65,7 +64,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
       );
     } else {
       return (
-        <Box display="flex" gap={3}>
+        <Stack direction="row" spacing={2}>
           <IconButton onClick={handelUpdateQuantity} size="small">
             {cartItem.quantity < 2 && <FaTrash />}
             {cartItem.quantity > 1 && <FaMinus />}
@@ -80,7 +79,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           <IconButton size="small" onClick={handleAddToCart}>
             <FaPlus />
           </IconButton>
-        </Box>
+        </Stack>
       );
     }
   };
@@ -88,43 +87,40 @@ const ProductItem = ({ product }: ProductItemProps) => {
   const { language } = useTheme();
   return (
     <Card
-      dir={language.direction === "rtl" ? "rtl" : "ltr"}
+      dir={language.direction}
       variant="outlined"
       sx={{
         my: 4,
         height: "100%",
-        "&.MuiCard-root": {
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        },
       }}
       ref={containerRef}
     >
-      <CardMedia component="img" image={thumbnail} alt={name} />
-      <CardHeader title={name} />
-      <CardContent>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Typography variant="body1" color="text.secondary">
-            Price
-          </Typography>
-          <Typography variant="h6" color="primary">
-            ${price.toLocaleString()}
-          </Typography>
-        </Stack>
-      </CardContent>
-      <CardActions>
-        <Box display="flex" gap={3}>
-          <ActionButton />
-          <Button variant="outlined" color="primary" size="small">
-            View
-          </Button>
-        </Box>
-      </CardActions>
+      <Stack justifyContent={"space-between"} sx={{ height: "100%" }}>
+        <CardMedia component="img" image={thumbnail} alt={name} />
+        <CardHeader title={name} />
+        <CardContent>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography variant="body1" color="text.secondary">
+              Price
+            </Typography>
+            <Typography variant="h6" color="primary">
+              ${price.toLocaleString()}
+            </Typography>
+          </Stack>
+        </CardContent>
+        <CardActions>
+          <Stack direction={"row"} spacing={3}>
+            <ActionButton />
+            <Button variant="outlined" color="primary" size="small">
+              View
+            </Button>
+          </Stack>
+        </CardActions>
+      </Stack>
     </Card>
   );
 };

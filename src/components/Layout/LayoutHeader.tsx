@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
-import { NavLink as NavLinkReact } from "react-router-dom";
+import { NavLink as NavLinkReact, useNavigate } from "react-router-dom";
 import MenuIcon from "../../assets/images/menu.png";
 import { useTheme } from "../../themes";
 import { useLayout } from "./Layout";
@@ -32,13 +32,18 @@ const NavLink = styled(NavLinkReact)(({ theme }) => ({
 
 export default function LayoutHeader() {
   const [openMenu, setOpenMenu] = useState(false);
+  const router = useNavigate();
 
   const { cart } = useLayout();
   const { language, changeLanguage } = useTheme();
 
+  const handleGotoCart = () => {
+    router("/cart");
+  }
+
   return (
     <AppBar
-      position="sticky"
+      position="static"
       color="primary"
       component={"nav"}
       sx={{ flexShrink: 0 }}
@@ -46,7 +51,7 @@ export default function LayoutHeader() {
       <Toolbar>
         <Stack direction="row" alignItems="center" gap={2}>
           <Typography variant="h6">Online Shop</Typography>
-          <IconButton color="inherit" size="large">
+          <IconButton color="inherit" size="large" onClick={handleGotoCart}>
             <Badge badgeContent={cart.length} color="secondary">
               <FaShoppingCart size={20} />
             </Badge>

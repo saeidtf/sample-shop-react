@@ -41,7 +41,7 @@ export default function Products() {
   if (isError) return <Box>Error</Box>;
 
   return (
-    <Stack spacing={3}>
+    <Stack spacing={8}>
       <Grid container spacing={2}>
         {rows?.map((product) => (
           <Grid item xs={12} sm={6} md={3} lg={4} key={product.id}>
@@ -59,7 +59,7 @@ export default function Products() {
             <PaginationItem
               {...item}
               component={Link}
-              to={`?page=${item.page}&pagesize=${pagesize}`}
+              to={`?page=${item.page}`}
             />
           )}
         />
