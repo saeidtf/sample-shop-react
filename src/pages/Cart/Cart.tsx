@@ -1,9 +1,17 @@
-import { Box, Grid, Stack, Table, TableBody, TableHead } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useLayout } from "../../components/Layout";
 import { PageHeader } from "../../components/PageHeader";
 import CartDetails from "./components/CartDetails";
-import TableHeaderItem from "./components/TableHeaderItem";
-import TableItem from "./components/TableItem";
+import CartItem from "./components/CartItem";
+import CartItemAction from "./components/CartItemAction";
 
 export default function Cart() {
   const { cart } = useLayout();
@@ -12,15 +20,25 @@ export default function Cart() {
     { title: "Cart", href: "#" },
   ];
 
+  if (cart.length === 0)
+    return (
+      <>
+        <PageHeader title="Cart" breadcrumb={breadcrumb} />
+        <Typography variant="h6" align="center" sx={{ mt: 4 }}>
+          Your cart is empty
+        </Typography>
+      </>
+    );
+
   return (
-    <Stack spacing={4} sx={{width:'100%'}}>
+    <Stack spacing={4} sx={{ width: "100%" }}>
       <PageHeader title="Cart" breadcrumb={breadcrumb} />
       <Grid
         container
         spacing={{
           xs: 0,
           md: 4,
-          xl:8
+          xl: 8,
         }}
       >
         <Grid
@@ -35,20 +53,14 @@ export default function Cart() {
           <CartDetails />
         </Grid>
         <Grid item xs={12} md={8}>
-          <Box sx={{ overflowX: "auto" }}>
-            <Table sx={{ minWidth: 500  }}>
-              <TableHead>
-                <TableHeaderItem
-                  headers={["Product", "Price", "Quantity", "Subtotal", "#"]}
-                />
-              </TableHead>
-              <TableBody>
-                {cart.map((item) => (
-                  <TableItem item={item} key={item.id} />
-                ))}
-              </TableBody>
-            </Table>
-          </Box>
+          <Card>
+            <CardHeader title="Cart Items" />
+            <CardContent>
+              {cart.map((item) => (
+                <CartItem item={item} key={item.id} />
+              ))}
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     </Stack>

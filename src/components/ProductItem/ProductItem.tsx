@@ -45,7 +45,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.thumbnail,
+      thumbnail: product.thumbnail,
       quantity: 1,
     });
   };
