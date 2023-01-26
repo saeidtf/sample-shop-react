@@ -1,8 +1,8 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
-import useLayoutContext, { CartType } from "../../hooks/useLayoutContext";
-import LayoutHeader from "./LayoutHeader";
+import useLayoutContext, { CartType, UserInfoType } from "../../hooks/useLayoutContext";
+import LayoutHeader from "./components/LayoutHeader";
 
 
 type LayoutContextType = {
@@ -10,6 +10,9 @@ type LayoutContextType = {
   addToCart: (product: CartType) => void;
   removeFromCart: (id: number) => void;
   updateCart: (id: number, quantity: number) => void;
+  userInfo: UserInfoType;
+  changeUserInfo: (userInfo: UserInfoType , token:string) => void;
+  logout: () => void;
 };
 
 const LayoutContext = React.createContext<LayoutContextType>(

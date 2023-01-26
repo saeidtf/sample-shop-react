@@ -8,15 +8,21 @@ export type CartType = {
   thumbnail: string;
 };
 
-function useLayoutContext() {
-  const [cart, setCart] = useState<CartType[]>([]);
+export type UserInfoType = {
+  id: number;
+  name: string;
+  email: string;
+  phone?: string;
+  family: string;
+  avatar?: string;
+};
 
-  useEffect(() => {
-    const cart = localStorage.getItem("cart");
-    if (cart) {
-      setCart(JSON.parse(cart));
-    }
-  }, []);
+function useLayoutContext() {
+  const user = localStorage.getItem("user") || "{}";
+  const cartItems = localStorage.getItem("cart") || "[]";
+
+  const [cart, setCart] = useState<CartType[]>(JSON.parse(cartItems));
+  const [userInfo, setUserInfo] = useState<UserInfoType>(JSON.parse(user));
 
   const addToCart = (item: CartType) => {
     const cart = localStorage.getItem("cart");
@@ -64,7 +70,27 @@ function useLayoutContext() {
     }
   };
 
-    return { cart, addToCart, removeFromCart, updateCart };
+  const changeUserInfo = (userInfo: UserInfoType, token: string) => {
+    localStorage.setItem("user", JSON.stringify(userInfo));
+    localStorage.setItem("token", token);
+    setUserInfo(userInfo);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setUserInfo({} as UserInfoType);
+  };
+
+  return {
+    cart,
+    addToCart,
+    removeFromCart,
+    updateCart,
+    logout,
+    userInfo,
+    changeUserInfo,
+  };
 }
 
 export default useLayoutContext;

@@ -4,6 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import usePost from "../../../hooks/usePost";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useLayout } from "../../../components/Layout";
 
 type Inputs = {
   email: string;
@@ -13,6 +14,7 @@ type Inputs = {
 export default function LoginTab() {
   const { loading, post } = usePost("/users/login");
   const router = useNavigate();
+  const { changeUserInfo } = useLayout();
 
   const { control, handleSubmit } = useForm<Inputs>({
     defaultValues: {
@@ -23,7 +25,7 @@ export default function LoginTab() {
   const onSubmit = async (data: Inputs) => {
     const res = await post(data);
     if (res.success) {
-      localStorage.setItem("token", res?.data?.token || "");
+      changeUserInfo(res?.data?.user, res?.data?.token);
       toast("Login successful", { type: "success" });
       router("/");
     } else {

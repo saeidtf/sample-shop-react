@@ -1,22 +1,25 @@
 import {
   AppBar,
+  Avatar,
   Badge,
   Box,
-  Button, Drawer,
+  Button,
+  Drawer,
   IconButton,
   Stack,
   styled,
   ToggleButton,
   ToggleButtonGroup,
   Toolbar,
-  Typography
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { NavLink as NavLinkReact, useNavigate } from "react-router-dom";
-import MenuIcon from "../../assets/images/menu.png";
-import { useTheme } from "../../themes";
-import { useLayout } from "./Layout";
+import MenuIcon from "../../../assets/images/menu.png";
+import { useTheme } from "../../../themes";
+import { useLayout } from "../Layout";
+import LoginHeader from "./LoginHeader";
 
 const NavLink = styled(NavLinkReact)(({ theme }) => ({
   textDecoration: "none",
@@ -39,7 +42,8 @@ export default function LayoutHeader() {
 
   const handleGotoCart = () => {
     router("/cart");
-  }
+  };
+
 
   return (
     <AppBar
@@ -55,21 +59,8 @@ export default function LayoutHeader() {
             <Badge badgeContent={cart.length} color="secondary">
               <FaShoppingCart size={20} />
             </Badge>
-          </IconButton>
-          <ToggleButtonGroup
-            value={language.language}
-            exclusive
-            onChange={(e, value) => {
-              changeLanguage({
-                language: value as "en" | "fa",
-                direction: value === "en" ? "ltr" : "rtl",
-              });
-            }}
-            size="small"
-          >
-             <ToggleButton value="en" >En</ToggleButton>
-             <ToggleButton value="fa" >Fa</ToggleButton>
-          </ToggleButtonGroup>
+          </IconButton>          
+          <LoginHeader />
         </Stack>
         <Box sx={{ flexGrow: 1 }} />
         <Box gap={4} sx={{ display: { xs: "none", md: "flex" } }}>

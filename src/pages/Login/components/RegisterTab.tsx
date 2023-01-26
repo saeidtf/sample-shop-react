@@ -4,6 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import usePost from "../../../hooks/usePost";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useLayout } from "../../../components/Layout";
 
 type Inputs = {
   email: string;
@@ -16,6 +17,7 @@ type Inputs = {
 export default function RegisterTab() {
   const { loading, post } = usePost("/users/register");
   const router = useNavigate();
+  const { changeUserInfo } = useLayout();
 
   const { control, handleSubmit } = useForm<Inputs>({
     defaultValues: {
@@ -26,10 +28,10 @@ export default function RegisterTab() {
       phone: "",
     },
   });
-  const onSubmit = async (data: Inputs) => {    
+  const onSubmit = async (data: Inputs) => {
     const res = await post(data);
     if (res.success) {
-      localStorage.setItem("token", res?.data?.token || "");
+      changeUserInfo(res?.data?.user, res?.data?.token);
       toast("Register successful", { type: "success" });
       router("/");
     } else {
@@ -40,10 +42,10 @@ export default function RegisterTab() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={4} mt={4}>
-      <Controller
+        <Controller
           name="name"
           control={control}
-          rules={{ required: true}}
+          rules={{ required: true }}
           render={({ field, formState }) => (
             <TextField
               label="Name"
@@ -72,7 +74,7 @@ export default function RegisterTab() {
         />
         <Controller
           name="phone"
-          control={control}          
+          control={control}
           render={({ field, formState }) => (
             <TextField
               label="Phone"
