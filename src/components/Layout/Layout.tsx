@@ -1,9 +1,11 @@
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, GlobalStyles, Stack, Typography } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
-import useLayoutContext, { CartType, UserInfoType } from "../../hooks/useLayoutContext";
+import useLayoutContext, {
+  CartType,
+  UserInfoType,
+} from "../../hooks/useLayoutContext";
 import LayoutHeader from "./components/LayoutHeader";
-
 
 type LayoutContextType = {
   cart: CartType[];
@@ -11,7 +13,7 @@ type LayoutContextType = {
   removeFromCart: (id: number) => void;
   updateCart: (id: number, quantity: number) => void;
   userInfo: UserInfoType;
-  changeUserInfo: (userInfo: UserInfoType , token:string) => void;
+  changeUserInfo: (userInfo: UserInfoType, token: string) => void;
   logout: () => void;
   clearCart: () => void;
 };
@@ -21,12 +23,16 @@ const LayoutContext = React.createContext<LayoutContextType>(
 );
 export const useLayout = () => React.useContext(LayoutContext);
 
-export default function Layout() {  
-  const value = useLayoutContext();    
+export default function Layout() {
+  const value = useLayoutContext();
 
   return (
     <LayoutContext.Provider value={value}>
-      
+      <GlobalStyles
+        styles={{
+          a: { textDecoration: "none" , color: "inherit" },                    
+        }}
+      />
       <Box
         sx={{
           maxWidth: "100%",
