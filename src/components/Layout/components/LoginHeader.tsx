@@ -39,6 +39,11 @@ export default function LoginHeader() {
     router("/login");
   };
 
+  const handleProfile = () => {
+    handleClose();
+    router("/profile");
+  };
+
   const handleLogOut = () => {
     logout();
     handleClose();
@@ -71,7 +76,7 @@ export default function LoginHeader() {
           >
             <List sx={{ width: 200 }}>
               <ListItem disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={handleProfile}>
                   <ListItemIcon>
                     <FaUser />
                   </ListItemIcon>

@@ -13,6 +13,7 @@ type LayoutContextType = {
   userInfo: UserInfoType;
   changeUserInfo: (userInfo: UserInfoType , token:string) => void;
   logout: () => void;
+  clearCart: () => void;
 };
 
 const LayoutContext = React.createContext<LayoutContextType>(

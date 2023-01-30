@@ -25,7 +25,7 @@ interface IFormInput{
 }
 
 export default function Checkout() {
-  const { cart, userInfo } = useLayout();
+  const { cart, userInfo , clearCart  } = useLayout();
   const {loading,post} = usePost("/orders")
   const router= useNavigate()   
 
@@ -58,6 +58,7 @@ export default function Checkout() {
 
     const res = await post(order);
     if(res.success){
+        clearCart();
         toast.success("Order placed successfully");
         router("/profile/orders");
 

@@ -9,12 +9,18 @@ interface IUseFetch<T> {
 function useFetch<T = unknown>(url: string): IUseFetch<T> {
   const baseUrl = "https://shopapi.taherifard.ir";
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<T>();
+  const [data, setData] = useState<T>({} as T);
   const [isError, setIsError] = useState(false);
+
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     setLoading(true);
-    fetch(baseUrl + url)
+    fetch(baseUrl + url, {
+      headers: {
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -22,7 +28,7 @@ function useFetch<T = unknown>(url: string): IUseFetch<T> {
       .catch((err) => {
         setIsError(true);
       })
-      .finally(() => {        
+      .finally(() => {
         setLoading(false);
       });
   }, [url]);

@@ -70,6 +70,11 @@ function useLayoutContext() {
     }
   };
 
+  const clearCart = () => {
+    localStorage.removeItem("cart");
+    setCart([]);
+  };
+
   const changeUserInfo = (userInfo: UserInfoType, token: string) => {
     localStorage.setItem("user", JSON.stringify(userInfo));
     localStorage.setItem("token", token);
@@ -90,6 +95,7 @@ function useLayoutContext() {
     logout,
     userInfo,
     changeUserInfo,
+    clearCart
   };
 }
 
