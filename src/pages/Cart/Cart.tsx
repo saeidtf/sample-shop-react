@@ -1,17 +1,15 @@
 import {
-  Box,
   Card,
   CardContent,
   CardHeader,
   Grid,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import { useLayout } from "../../components/Layout";
 import { PageHeader } from "../../components/PageHeader";
 import CartDetails from "./components/CartDetails";
 import CartItem from "./components/CartItem";
-import CartItemAction from "./components/CartItemAction";
 
 export default function Cart() {
   const { cart } = useLayout();

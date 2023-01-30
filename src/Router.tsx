@@ -1,8 +1,21 @@
 import React from "react";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "./components/Layout";
-import {About, Cart, Contact, Home, Login, Products} from "./pages";
+import {About, Cart, Checkout, Contact, Home, Login, Orders, Products, Profile} from "./pages";
+
+
+type PrivateRouteProps = {
+  children: React.ReactNode;  
+};
+
+const PrivateRoute = ({ children }: PrivateRouteProps) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+  return <>{children}</>;
+};
 
 
 export default function Router() {
@@ -16,6 +29,11 @@ export default function Router() {
           <Route path="products" element={<Products />} />
           <Route path="cart" element={<Cart />} />
           <Route path="login" element={<Login />} />
+          <Route path="checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
+          <Route path="profile" >
+            <Route index element={<PrivateRoute><Profile /></PrivateRoute>} />
+            <Route path="orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
+          </Route>
           <Route path="*" element={<div>404</div>} />
         </Route>
       </Routes>

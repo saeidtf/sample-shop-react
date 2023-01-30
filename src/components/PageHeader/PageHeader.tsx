@@ -1,4 +1,4 @@
-import { Breadcrumbs, Stack, Typography } from "@mui/material";
+import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -20,16 +20,16 @@ export default function PageHeader({ title, breadcrumb }: PageHeaderProps) {
       </Typography>
       {breadcrumb && (
         <Breadcrumbs aria-label="breadcrumb">
-          {breadcrumb.map((item) => (
-            <>
+          {breadcrumb.map((item,index) => (
+            <Box key={item.title}>
               {item.href === "#" ? (
-                <Typography key={item.title}>{item.title}</Typography>
+                <Typography>{item.title}</Typography>
               ) : (
-                <Link key={item.title} to={item.href}>
+                <Link to={item.href}>
                   {item.title}
                 </Link>
               )}
-            </>
+            </Box>
           ))}
         </Breadcrumbs>
       )}

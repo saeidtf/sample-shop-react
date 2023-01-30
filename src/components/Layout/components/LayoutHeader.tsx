@@ -1,17 +1,12 @@
 import {
-  AppBar,
-  Avatar,
-  Badge,
+  AppBar, Badge,
   Box,
   Button,
   Drawer,
   IconButton,
   Stack,
-  styled,
-  ToggleButton,
-  ToggleButtonGroup,
-  Toolbar,
-  Typography,
+  styled, Toolbar,
+  Typography
 } from "@mui/material";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";

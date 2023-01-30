@@ -1,18 +1,18 @@
 import {
   Button,
   Card,
-  CardActions,
   CardContent,
   CardHeader,
   Divider,
   Stack,
 } from "@mui/material";
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useLayout } from "../../../components/Layout";
 import CartDetailsItem from "./CartDetailsItem";
 
 export default function CartDetails() {
   const { cart } = useLayout();
+  const router = useNavigate();
 
   const subtotal = cart.reduce((acc, item) => {
     return acc + item.price * item.quantity;
@@ -22,13 +22,25 @@ export default function CartDetails() {
     return acc + item.quantity;
   }, 0);
 
+  const handleContinue = () => {
+    router("/products");
+  };
+
+  const handleCheckout = () => {
+    router("/checkout");
+  };
+
   return (
-    <Stack spacing={8} sx={{width:'100%'}} pr={{
-        xs:0,
-        md:4,
-        xl:0
-    }}>
-      <Card sx={{maxWidth:'100%'}}>
+    <Stack
+      spacing={8}
+      sx={{ width: "100%" }}
+      pr={{
+        xs: 0,
+        md: 4,
+        xl: 0,
+      }}
+    >
+      <Card sx={{ maxWidth: "100%" }}>
         <CardHeader title="Cart Details" />
         <CardContent>
           <Stack spacing={3}>
@@ -47,8 +59,12 @@ export default function CartDetails() {
         </CardContent>
       </Card>
       <Stack direction={"row"} spacing={2}>
-        <Button variant="contained">Checkout</Button>
-        <Button variant="outlined">Continue Shopping</Button>
+        <Button variant="contained" onClick={handleCheckout}>
+          Checkout
+        </Button>
+        <Button variant="outlined" onClick={handleContinue}>
+          Continue Shopping
+        </Button>
       </Stack>
     </Stack>
   );
