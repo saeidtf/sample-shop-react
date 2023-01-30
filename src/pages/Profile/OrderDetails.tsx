@@ -5,32 +5,31 @@ import {
   TableCell,
   TableFooter,
   TableHead,
-  TableRow,
+  TableRow
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import CustomHeader from "./components/CustomHeader";
-import { OrderDataType } from "./types";
+import { OrderDetailsDataType } from "./types";
 
 type OrderType = {
-  data: {
-    count: number;
-    rows: OrderDataType[];
-  };
+  data: OrderDetailsDataType[];
   success: boolean;
 };
 
 export default function Orders() {
+  const params = useParams();
   const {
-    data: { data: { rows = [] } = {} } = {} as OrderType,
+    data: { data = [] } = {} as OrderType,
     isError,
     loading,
-  } = useFetch<OrderType>("/orders?pageSize=50");
+  } = useFetch<OrderType>(`/orders/${params.id}`);
 
   const breadcrumb = [
     { title: "Home", href: "/" },
     { title: "Profile", href: "/profile" },
-    { title: "Orders", href: "#" },
+    { title: "Orders", href: "/profile/orders" },
+    { title: "Order Details", href: "#" },
   ];
 
   return (
@@ -44,27 +43,27 @@ export default function Orders() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Order ID</TableCell>
-              <TableCell>Order Date</TableCell>
+              <TableCell>Product Image</TableCell>
+              <TableCell>Product Name</TableCell>
               <TableCell>Quantity</TableCell>
-              <TableCell>Order Total</TableCell>
-              <TableCell>Order Status</TableCell>
-              <TableCell>#</TableCell>
+              <TableCell>Price</TableCell>
+              <TableCell>Total</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {data.map((row) => (
               <TableRow key={row.id}>
-                <TableCell>{row.id}</TableCell>
                 <TableCell>
-                  {new Date(row.createdAt).toLocaleDateString()}
+                  <img
+                    src={row.product.image}
+                    alt={row.product.name}
+                    width="100"
+                  />
                 </TableCell>
-                <TableCell>{row.quantity.toLocaleString()}</TableCell>
+                <TableCell>{row.product.name}</TableCell>
+                <TableCell>{row.quantity}</TableCell>
+                <TableCell>{row.price.toLocaleString()}</TableCell>
                 <TableCell>{row.total.toLocaleString()}</TableCell>
-                <TableCell>{row.statusTitle}</TableCell>
-                <TableCell>
-                  <Link to={`/profile/orders/${row.id}`}>View</Link>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -72,14 +71,16 @@ export default function Orders() {
             <TableRow>
               <TableCell colSpan={2}>Total</TableCell>
               <TableCell>
-                {rows
+                {data
                   .reduce((acc, cur) => acc + cur.quantity, 0)
                   .toLocaleString()}
               </TableCell>
               <TableCell>
-                {rows.reduce((acc, cur) => acc + cur.total, 0).toLocaleString()}
+                {data.reduce((acc, cur) => acc + cur.price, 0).toLocaleString()}
               </TableCell>
-              <TableCell colSpan={2} />
+              <TableCell>
+                {data.reduce((acc, cur) => acc + cur.total, 0).toLocaleString()}
+              </TableCell>
             </TableRow>
           </TableFooter>
         </Table>

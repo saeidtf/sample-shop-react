@@ -2,7 +2,7 @@ import React from "react";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "./components/Layout";
-import {About, Cart, Checkout, Contact, Home, Login, Orders, Products, Profile} from "./pages";
+import {About, Cart, Checkout, Contact, Home, Login, OrderDetails, Orders, Products, Profile} from "./pages";
 
 
 type PrivateRouteProps = {
@@ -33,6 +33,7 @@ export default function Router() {
           <Route path="profile" >
             <Route index element={<PrivateRoute><Profile /></PrivateRoute>} />
             <Route path="orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
+            <Route path="orders/:id" element={<PrivateRoute><OrderDetails /></PrivateRoute>} />
           </Route>
           <Route path="*" element={<div>404</div>} />
         </Route>

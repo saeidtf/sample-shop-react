@@ -9,3 +9,16 @@ export type OrderDataType = {
   total: number;
   userId: number;
 };
+
+export type OrderDetailsDataType = {
+  id: number;
+  productId: number;
+  quantity: number;
+  price: number;
+  total: number;
+  product: {
+    id: number;
+    name: string;
+    image: string;
+  };
+};
