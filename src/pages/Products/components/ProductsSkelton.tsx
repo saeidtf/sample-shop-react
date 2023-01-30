@@ -6,7 +6,7 @@ export default function ProductsSkelton() {
       {Array.from({ length: 12 }).map((_, index) => (
         <Grid item xs={12} sm={6} md={3} lg={4} key={index}>
           <Skeleton variant="rectangular" width="100%" height={200} />
-          <Skeleton variant="text" width="100%" height={50}/>
+          <Skeleton variant="text" width="100%" height={50} />
           <Stack direction="row" justifyContent="space-between">
             <Skeleton variant="text" width="20%" />
             <Skeleton variant="text" width="20%" />

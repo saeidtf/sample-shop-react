@@ -11,7 +11,6 @@ function useFetch<T = unknown>(url: string): IUseFetch<T> {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<T>({} as T);
   const [isError, setIsError] = useState(false);
-
   const token = localStorage.getItem("token");
 
   useEffect(() => {

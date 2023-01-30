@@ -12,6 +12,7 @@ specifiers:
   '@testing-library/react': ^13.4.0
   '@testing-library/user-event': ^13.5.0
   '@types/jest': ^27.5.2
+  '@types/lodash': ^4.14.191
   '@types/node': ^16.18.4
   '@types/react': ^18.0.25
   '@types/react-dom': ^18.0.9
@@ -21,6 +22,7 @@ specifiers:
   '@types/stylis': ^4.0.2
   jss: ^10.9.2
   jss-rtl: ^0.3.0
+  lodash: ^4.17.21
   react: ^18.2.0
   react-dom: ^18.2.0
   react-hook-form: ^7.42.1
@@ -49,6 +51,7 @@ dependencies:
   '@testing-library/react': 13.4.0_react-dom@18.2.0+react@18.2.0
   '@testing-library/user-event': 13.5.0
   '@types/jest': 27.5.2
+  '@types/lodash': 4.14.191
   '@types/node': 16.18.11
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
@@ -58,6 +61,7 @@ dependencies:
   '@types/stylis': 4.0.2
   jss: 10.9.2
   jss-rtl: 0.3.0_jss@10.9.2
+  lodash: 4.17.21
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.42.1_react@18.2.0
@@ -2834,6 +2838,10 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: false
+
+  /@types/lodash/4.14.191:
+    resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
     dev: false
 
   /@types/mime/3.0.1:
