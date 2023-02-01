@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import instance from "../util/serviceHandler";
 interface IUseFetch<T> {
   loading: boolean;
   data?: T;
@@ -7,22 +7,17 @@ interface IUseFetch<T> {
 }
 
 function useFetch<T = unknown>(url: string): IUseFetch<T> {
-  const baseUrl = "https://shopapi.taherifard.ir";
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<T>({} as T);
   const [isError, setIsError] = useState(false);
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     setLoading(true);
-    fetch(baseUrl + url, {
-      headers: {
-        ...(token && { Authorization: `Bearer ${token}` }),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
+
+    instance
+      .get(url)
+      .then((res) => {
+        setData(res.data);
       })
       .catch((err) => {
         setIsError(true);
