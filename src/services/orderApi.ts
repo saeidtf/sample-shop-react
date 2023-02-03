@@ -1,6 +1,5 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
 import { OrderDataType, OrderDetailsDataType } from "../pages/Profile/types";
-import { baseQuery } from "../redux/baseQuery";
+import { emptySplitApi } from "../redux/baseQuery";
 
 export type OrderQuery = {
   page?: number;
@@ -41,9 +40,7 @@ type OrderResponseType = {
   message: string;
 };
 
-export const orderApi = createApi({
-  reducerPath: "orderApi",
-  baseQuery: baseQuery,
+export const orderApi = emptySplitApi.injectEndpoints({    
   endpoints: (builder) => ({
     getOrders: builder.query<OrderType, OrderQuery>({
       query: (queryArg) => ({
@@ -64,6 +61,7 @@ export const orderApi = createApi({
       }),
     }),
   }),
+  overrideExisting: false,
 });
 
 export const {

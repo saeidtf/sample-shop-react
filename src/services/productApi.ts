@@ -1,5 +1,4 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import {baseQuery } from "../redux/baseQuery";
+import { emptySplitApi } from "../redux/baseQuery";
 
 export type ProductItemType = {
   id: number;
@@ -30,9 +29,7 @@ export type ProductWidgetsType = {
     success: boolean;
 };
 
-export const productApi = createApi({
-  reducerPath: "productApi",
-  baseQuery: baseQuery,
+export const productApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query<ProductDataType, ProductQuery>({
       query: (queryArg) => ({
