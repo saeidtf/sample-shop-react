@@ -1,6 +1,6 @@
 import { Grid, Stack, Typography } from "@mui/material";
 import React from "react";
-import { ICart } from "@redux/feuchers/cartSlice";
+import { ICart } from "../../../redux/feuchers/cartSlice";
 import CartItemAction from "./CartItemAction";
 
 type CartItemProps = {
