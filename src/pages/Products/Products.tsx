@@ -6,50 +6,39 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
+import debounce from "lodash/debounce";
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import ProductItem from "../../components/ProductItem";
-import useFetch from "../../hooks/useFetch";
+import { useGetProductsQuery } from "../../services/productApi";
 import ProductsSkelton from "./components/ProductsSkelton";
-import debounce from 'lodash/debounce'
-
-export type ProductItemType = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  stock: number;
-  thumbnail: string;
-  description: string;
-};
-
-type ProductDataType = {
-  data: {
-    count: number;
-    rows: ProductItemType[];
-  };
-  success: boolean;
-};
 
 export default function Products() {
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
-  const pagesize = Number(searchParams.get("pagesize")) || 12;
-  const [search, setSearch] = useState("");
+  const pageSize = Number(searchParams.get("pagesize")) || 12;
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+  const router =useNavigate();
 
   const {
+    data: { data: { rows = [], count = 0 } = {} } = {},
     isError,
-    loading,
-    data: { data } = {},
-  } = useFetch<ProductDataType>(
-    `/products?pageSize=${pagesize}&page=${page}${search && `&q=${search}`}`
+    isLoading: loading,
+  } = useGetProductsQuery(
+    {
+      page,
+      pageSize,
+      ...(search && { q: search }),
+    },
+    {
+      refetchOnMountOrArgChange: true,
+    }
   );
-  const { rows, count } = data || ({} as ProductDataType["data"]);
 
   const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    console.log(value)
     setSearch(value);
+    router(`/products?page=1${value && `&search=${value}`}`)
   }, 1000);
 
   if (isError) return <Box>Error</Box>;
@@ -76,9 +65,9 @@ export default function Products() {
           ))}
         </Grid>
       )}
-      {count && count > pagesize && (
+      {count && count > pageSize && (
         <Pagination
-          count={Math.ceil(count / pagesize)}
+          count={Math.ceil(count / pageSize)}
           page={page}
           showFirstButton
           showLastButton

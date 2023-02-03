@@ -2,26 +2,14 @@ import { Box, Card, CardContent, CardHeader, Grid, Skeleton } from "@mui/materia
 import CustomSlider from "../../../components/CustomSlider";
 import ProductItem from "../../../components/ProductItem";
 import useFetch from "../../../hooks/useFetch";
-
-export type Product = {
-  id: number;
-  name: string;
-  price: number;
-  thumbnail: string;
-};
-
-type ResponseType = {
-  data: Product[];
-  success: boolean;
-};
+import { ProductItemType } from "../../../services";
 
 type PrductWidgetProps = {
   title: string;
-  url: string;
+  data : ProductItemType[],
+  loading?: boolean;
 };
-export const PrductWidget = ({ title, url }: PrductWidgetProps) => {
-  const { data, loading } = useFetch<ResponseType>(url);
-  const products = data?.data || [];
+export const PrductWidget = ({ title, data , loading }: PrductWidgetProps) => {
 
   var settings = {
     dots: true,
@@ -50,7 +38,7 @@ export const PrductWidget = ({ title, url }: PrductWidgetProps) => {
         )}
         {!loading && (
           <CustomSlider {...settings}>
-            {products.map((item) => (
+            {data.map((item) => (
               <ProductItem key={item.id} product={item} />
             ))}
           </CustomSlider>

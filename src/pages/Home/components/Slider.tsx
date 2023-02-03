@@ -1,26 +1,15 @@
 import { Box, Skeleton } from "@mui/material";
-import React from "react";
 import CustomSlider from "../../../components/CustomSlider";
-import useFetch from "../../../hooks/useFetch";
+import { useGetSliderQuery } from "../../../services";
 
-type DataType = {
-  id: number;
-  image: string;
-  title: string;
-  smallImage: string;
-};
 
-type SliderType = {
-  data: DataType[];
-  success: boolean;
-};
 
 export default function SliderPage() {
   const {
     data: { data: sliders = [] } = {},
+    isLoading: loading,
     isError,
-    loading,
-  } = useFetch<SliderType>("/sliders");
+  } = useGetSliderQuery()
 
   var settings = {
     dots: true,

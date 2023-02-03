@@ -13,6 +13,7 @@ import { PageHeader } from "../../components/PageHeader";
 import STButton from "../../components/STButton";
 import { TextFieldController } from "../../components/TextFieldController";
 import usePost from "../../hooks/usePost";
+import { usePostOrderMutation } from "../../services/orderApi";
 import CartItem from "../Cart/components/CartItem";
 
 interface IFormInput{
@@ -24,8 +25,8 @@ interface IFormInput{
 
 export default function Checkout() {
   const { cart, userInfo , clearCart  } = useLayout();
-  const {loading,post} = usePost("/orders")
   const router= useNavigate()   
+  const [createOrder ,{isLoading:loading}] = usePostOrderMutation();
 
   const breadcrumb = [
     { title: "Home", href: "/" },
@@ -54,7 +55,7 @@ export default function Checkout() {
         orderItems,
     };
 
-    const res = await post(order);
+    const res = await createOrder(order).unwrap();
     if(res.success){
         clearCart();
         toast.success("Order placed successfully");

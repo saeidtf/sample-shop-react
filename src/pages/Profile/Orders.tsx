@@ -5,27 +5,20 @@ import {
   TableCell,
   TableFooter,
   TableHead,
-  TableRow,
+  TableRow
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+import { useGetOrdersQuery } from "../../services/orderApi";
 import CustomHeader from "./components/CustomHeader";
-import { OrderDataType } from "./types";
-
-type OrderType = {
-  data: {
-    count: number;
-    rows: OrderDataType[];
-  };
-  success: boolean;
-};
 
 export default function Orders() {
   const {
-    data: { data: { rows = [] } = {} } = {} as OrderType,
+    data: { data: { rows = [] } = {} } = {},
     isError,
-    loading,
-  } = useFetch<OrderType>("/orders?pageSize=50");
+    isLoading: loading,
+  } = useGetOrdersQuery({ pageSize: 50},{
+    refetchOnMountOrArgChange: true,
+  });
 
   const breadcrumb = [
     { title: "Home", href: "/" },

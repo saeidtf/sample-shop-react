@@ -8,22 +8,16 @@ import {
   TableRow
 } from "@mui/material";
 import { useParams } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+import { useGetOrderQuery } from "../../services/orderApi";
 import CustomHeader from "./components/CustomHeader";
-import { OrderDetailsDataType } from "./types";
-
-type OrderType = {
-  data: OrderDetailsDataType[];
-  success: boolean;
-};
 
 export default function Orders() {
-  const params = useParams();
+  const params = useParams();  
   const {
-    data: { data = [] } = {} as OrderType,
+    data : { data = [] } = {},
     isError,
-    loading,
-  } = useFetch<OrderType>(`/orders/${params.id}`);
+    isLoading: loading,
+  } = useGetOrderQuery({ id: params.id as string }, { skip: !params.id })
 
   const breadcrumb = [
     { title: "Home", href: "/" },
