@@ -43,14 +43,14 @@ export const userApi = createApi({
     endpoints: (builder) => ({
         login: builder.mutation<ResponseType,LoginBodyType>({
             query: (body) => ({
-                url: "/auth/login",
+                url: "users/login",
                 method: "POST",
                 body,
             }),
         }),
         register: builder.mutation<ResponseType,RegisterBodyType>({
             query: (body) => ({
-                url: "/auth/register",
+                url: "users/register",
                 method: "POST",
                 body,
             }),
