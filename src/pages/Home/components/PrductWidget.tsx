@@ -1,9 +1,7 @@
 import { Box, Card, CardContent, CardHeader, Grid, Skeleton } from "@mui/material";
 import CustomSlider from "../../../components/CustomSlider";
 import ProductItem from "../../../components/ProductItem";
-import useFetch from "../../../hooks/useFetch";
 import { ProductItemType } from "../../../services";
-
 type PrductWidgetProps = {
   title: string;
   data : ProductItemType[],

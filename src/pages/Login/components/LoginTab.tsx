@@ -1,10 +1,9 @@
 import { Button, Stack, TextField } from "@mui/material";
-import React from "react";
-import { useForm, Controller } from "react-hook-form";
-import usePost from "../../../hooks/usePost";
-import { toast } from "react-toastify";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useLayout } from "../../../components/Layout";
+import { useLoginMutation } from "../../../services";
 
 type Inputs = {
   email: string;
@@ -12,9 +11,10 @@ type Inputs = {
 };
 
 export default function LoginTab() {
-  const { loading, post } = usePost("/users/login");
   const router = useNavigate();
   const { changeUserInfo } = useLayout();
+
+  const [logingUser, { isLoading: loading }] = useLoginMutation();
 
   const { control, handleSubmit } = useForm<Inputs>({
     defaultValues: {
@@ -23,8 +23,9 @@ export default function LoginTab() {
     },
   });
   const onSubmit = async (data: Inputs) => {
-    const res = await post(data);
-    if (res.success) {
+    const res = await logingUser(data).unwrap();
+
+    if (res.success && res?.data?.user) {      
       changeUserInfo(res?.data?.user, res?.data?.token);
       toast("Login successful", { type: "success" });
       router("/");

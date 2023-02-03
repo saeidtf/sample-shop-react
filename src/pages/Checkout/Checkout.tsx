@@ -12,7 +12,6 @@ import { useLayout } from "../../components/Layout";
 import { PageHeader } from "../../components/PageHeader";
 import STButton from "../../components/STButton";
 import { TextFieldController } from "../../components/TextFieldController";
-import usePost from "../../hooks/usePost";
 import { usePostOrderMutation } from "../../services/orderApi";
 import CartItem from "../Cart/components/CartItem";
 
