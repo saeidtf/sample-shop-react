@@ -1,4 +1,5 @@
-import { emptySplitApi } from "../redux/baseQuery";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import {baseQuery } from "../redux/baseQuery";
 
 export interface ResponseType {
     data:    Data | null;
@@ -36,7 +37,9 @@ export type RegisterBodyType = {
 
 
 
-export const userApi = emptySplitApi.injectEndpoints({
+export const userApi = createApi({
+    reducerPath: "userApi",
+    baseQuery,
     endpoints: (builder) => ({
         login: builder.mutation<ResponseType,LoginBodyType>({
             query: (body) => ({

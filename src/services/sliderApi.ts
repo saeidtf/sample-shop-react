@@ -1,4 +1,5 @@
-import { emptySplitApi } from "../redux/baseQuery";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQuery } from "../redux/baseQuery";
 
 export type DataType = {
   id: number;
@@ -12,7 +13,9 @@ export type SliderType = {
   success: boolean;
 };
 
-export const sliderApi = emptySplitApi.injectEndpoints({
+export const sliderApi = createApi({
+  reducerPath: "sliderApi",
+  baseQuery: baseQuery,
   endpoints: (builder) => ({
     getSlider: builder.query<SliderType, void>({
       query: () => ({
