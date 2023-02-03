@@ -4,6 +4,7 @@ import type {
   FetchArgs,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
+import { toast } from "react-toastify";
 
 const baseQuery = fetchBaseQuery({
   cache: "default",
@@ -27,10 +28,12 @@ const baseQueryWithReauth: BaseQueryFn<
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
+  
   if (
     result.error &&
-    (result.error.status === 401 || result.error.status === 403)
-  ) {
+    (result.meta?.response?.status === 401 || result.meta?.response?.status === 403)
+  ) {  
+    toast.error("Your session has expired. Please login again.");
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     window.location.href = "/login";
