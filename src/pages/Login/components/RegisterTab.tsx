@@ -2,7 +2,8 @@ import { Button, Stack, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLayout } from "../../../components/Layout";
+import { login } from "../../../redux/feuchers/userSlice";
+import { useAppDispatch } from "../../../redux/hook";
 import { useRegisterMutation } from "../../../services";
 
 type Inputs = {
@@ -15,7 +16,7 @@ type Inputs = {
 
 export default function RegisterTab() {
   const router = useNavigate();
-  const { changeUserInfo } = useLayout();
+  const dispatch = useAppDispatch();
 
   const [createUser, { isLoading: loading }] = useRegisterMutation();
 
@@ -31,8 +32,13 @@ export default function RegisterTab() {
   const onSubmit = async (data: Inputs) => {
     const res = await createUser(data).unwrap();
 
-    if (res.success && res?.data?.user) {      
-      changeUserInfo(res?.data?.user, res?.data?.token);
+    if (res.success && res?.data?.user) {
+      dispatch(
+        login({
+          value: res?.data?.user,
+          token: res?.data?.token,
+        })
+      );
       toast("Register successful", { type: "success" });
       router("/");
     } else {

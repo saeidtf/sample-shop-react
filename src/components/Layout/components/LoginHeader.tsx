@@ -8,18 +8,20 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
+  ListItemText
 } from "@mui/material";
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useLayout } from "../Layout";
 import Popover from "@mui/material/Popover";
+import React from "react";
 import { FaUser } from "react-icons/fa";
-import { GrLogout } from 'react-icons/gr';
+import { GrLogout } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
+import { logout, selectUser } from "../../../redux/feuchers/userSlice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 
 export default function LoginHeader() {
-  const { userInfo , logout } = useLayout();
+  const userInfo = useAppSelector(selectUser);
   const router = useNavigate();
+  const dispatch = useAppDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
@@ -45,10 +47,10 @@ export default function LoginHeader() {
   };
 
   const handleLogOut = () => {
-    logout();
+    dispatch(logout());
     handleClose();
     router("/");
-  }
+  };
 
   return (
     <Box>

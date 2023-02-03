@@ -7,12 +7,18 @@ import {
   CardMedia,
   IconButton,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import React from "react";
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
+import {
+  addToCart,
+  removeFromCart,
+  selectCart,
+  updateCart
+} from "../../redux/feuchers/cartSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { useTheme } from "../../themes";
-import { useLayout } from "../Layout";
 
 type ProductItemProps = {
   product: {
@@ -26,28 +32,31 @@ type ProductItemProps = {
 const ProductItem = ({ product }: ProductItemProps) => {
   const { name, price, thumbnail } = product;
   const containerRef = React.useRef(null);
+  const cart = useAppSelector(selectCart);
+  const dispatch = useAppDispatch();
 
-  const { addToCart, updateCart, removeFromCart, cart } = useLayout();
   const cartItem = cart.find((item) => item.id === product.id);
 
   const handelUpdateQuantity = () => {
     if (!cartItem) return;
 
     if (cartItem?.quantity < 2) {
-      removeFromCart(product.id);
+      dispatch(removeFromCart(product.id));
     } else {
-      updateCart(product.id, cartItem.quantity - 1);
+      dispatch(updateCart({ id: product.id, quantity: cartItem.quantity - 1 }));
     }
   };
 
   const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      thumbnail: product.thumbnail,
-      quantity: 1,
-    });
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        thumbnail: product.thumbnail,
+        quantity: 1,
+      })
+    );
   };
 
   const ActionButton = () => {

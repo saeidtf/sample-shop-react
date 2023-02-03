@@ -1,26 +1,27 @@
 import { IconButton, Stack, Typography } from "@mui/material";
-import React from "react";
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
-import { useLayout } from "../../../components/Layout";
-import { CartType } from "../../../hooks/useLayoutContext";
+
+import { ICart, removeFromCart, updateCart } from "../../../redux/feuchers/cartSlice";
+import { useAppDispatch } from "../../../redux/hook";
 
 type CartItemActionProps = {
-  item: CartType;
+  item: ICart;
 };
 
 export default function CartItemAction({ item }: CartItemActionProps) {
-  const { updateCart, removeFromCart } = useLayout();
+  const dispatch = useAppDispatch();
+  
 
   const handelUpdateQuantity = () => {
     if (item?.quantity < 2) {
-      removeFromCart(item.id);
+      dispatch(removeFromCart(item.id));
     } else {
-      updateCart(item.id, item.quantity - 1);
+      dispatch(updateCart({ id: item.id, quantity: item.quantity - 1 }));
     }
   };
 
   const handleAddToCart = () => {
-    updateCart(item.id, item.quantity + 1);
+    dispatch(updateCart({ id: item.id, quantity: item.quantity + 1 }));
   };
 
   return (

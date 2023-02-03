@@ -2,7 +2,8 @@ import { Button, Stack, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLayout } from "../../../components/Layout";
+import { login } from "../../../redux/feuchers/userSlice";
+import { useAppDispatch } from "../../../redux/hook";
 import { useLoginMutation } from "../../../services";
 
 type Inputs = {
@@ -12,7 +13,7 @@ type Inputs = {
 
 export default function LoginTab() {
   const router = useNavigate();
-  const { changeUserInfo } = useLayout();
+  const dispatch = useAppDispatch();
 
   const [logingUser, { isLoading: loading }] = useLoginMutation();
 
@@ -25,8 +26,13 @@ export default function LoginTab() {
   const onSubmit = async (data: Inputs) => {
     const res = await logingUser(data).unwrap();
 
-    if (res.success && res?.data?.user) {      
-      changeUserInfo(res?.data?.user, res?.data?.token);
+    if (res.success && res?.data?.user) {
+      dispatch(
+        login({
+          value: res?.data?.user,
+          token: res?.data?.token,
+        })
+      );
       toast("Login successful", { type: "success" });
       router("/");
     } else {

@@ -1,10 +1,10 @@
 import { Grid, Stack, Typography } from "@mui/material";
 import React from "react";
-import { CartType } from "../../../hooks/useLayoutContext";
+import { ICart } from "@redux/feuchers/cartSlice";
 import CartItemAction from "./CartItemAction";
 
 type CartItemProps = {
-  item: CartType;
+  item: ICart;
   isCheckout?: boolean;
 };
 

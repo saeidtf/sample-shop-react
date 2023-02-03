@@ -4,15 +4,17 @@ import {
   CardHeader,
   Grid,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material";
-import { useLayout } from "../../components/Layout";
 import { PageHeader } from "../../components/PageHeader";
+import { selectCart } from "../../redux/feuchers/cartSlice";
+import { useAppSelector } from "../../redux/hook";
 import CartDetails from "./components/CartDetails";
 import CartItem from "./components/CartItem";
 
 export default function Cart() {
-  const { cart } = useLayout();
+  const cart = useAppSelector(selectCart);
+
   const breadcrumb = [
     { title: "Home", href: "/" },
     { title: "Cart", href: "#" },

@@ -12,28 +12,27 @@ import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { NavLink as NavLinkReact, useNavigate } from "react-router-dom";
 import MenuIcon from "../../../assets/images/menu.png";
-import { useTheme } from "../../../themes";
-import { useLayout } from "../Layout";
+import { selectCart } from "../../../redux/feuchers/cartSlice";
+import { useAppSelector } from "../../../redux/hook";
 import LoginHeader from "./LoginHeader";
 
 const NavLink = styled(NavLinkReact)(({ theme }) => ({
   textDecoration: "none",
-  color: theme.palette.common.black,
+  color: "inherit",
   transition: "color 0.3s ease-in-out",
   "&.active": {
-    color: theme.palette.common.white,
+    color: theme.palette.secondary.main,
   },
   "&:hover": {
-    color: theme.palette.common.white,
+    color: theme.palette.secondary.light,
   },
 }));
 
 export default function LayoutHeader() {
   const [openMenu, setOpenMenu] = useState(false);
-  const router = useNavigate();
-
-  const { cart } = useLayout();
-  const { language, changeLanguage } = useTheme();
+  const router = useNavigate();  
+  const cart = useAppSelector(selectCart);  
+  
 
   const handleGotoCart = () => {
     router("/cart");

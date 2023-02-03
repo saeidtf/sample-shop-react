@@ -4,15 +4,17 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  Stack,
+  Stack
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useLayout } from "../../../components/Layout";
+import { selectCart } from "../../../redux/feuchers/cartSlice";
+import { useAppSelector } from "../../../redux/hook";
 import CartDetailsItem from "./CartDetailsItem";
 
 export default function CartDetails() {
-  const { cart } = useLayout();
   const router = useNavigate();
+
+  const cart = useAppSelector(selectCart);
 
   const subtotal = cart.reduce((acc, item) => {
     return acc + item.price * item.quantity;

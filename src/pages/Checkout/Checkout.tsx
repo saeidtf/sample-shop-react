@@ -1,31 +1,30 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  Stack
-} from "@mui/material";
+import { Card, CardContent, CardHeader, Grid, Stack } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLayout } from "../../components/Layout";
 import { PageHeader } from "../../components/PageHeader";
 import STButton from "../../components/STButton";
 import { TextFieldController } from "../../components/TextFieldController";
+import { clearCart, selectCart } from "../../redux/feuchers/cartSlice";
+import { selectUser } from "../../redux/feuchers/userSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { usePostOrderMutation } from "../../services/orderApi";
 import CartItem from "../Cart/components/CartItem";
 
-interface IFormInput{
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-    address: string;
+interface IFormInput {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  address: string;
 }
 
-export default function Checkout() {
-  const { cart, userInfo , clearCart  } = useLayout();
-  const router= useNavigate()   
-  const [createOrder ,{isLoading:loading}] = usePostOrderMutation();
+export default function Checkout() {  
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector(selectCart);
+  const userInfo = useAppSelector(selectUser)
+
+  const router = useNavigate();
+  const [createOrder, { isLoading: loading }] = usePostOrderMutation();
 
   const breadcrumb = [
     { title: "Home", href: "/" },
@@ -42,26 +41,24 @@ export default function Checkout() {
     },
   });
 
-
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const orderItems = cart.map((item) => ({
-        productId: item.id,
-        quantity: item.quantity,
+      productId: item.id,
+      quantity: item.quantity,
     }));
 
     const order = {
-        ...data,
-        orderItems,
+      ...data,
+      orderItems,
     };
 
     const res = await createOrder(order).unwrap();
-    if(res.success){
-        clearCart();
-        toast.success("Order placed successfully");
-        router("/profile/orders");
-
-    }else{
-        toast.error(res.message || "Something went wrong");
+    if (res.success) {
+      dispatch(clearCart());
+      toast.success("Order placed successfully");
+      router("/profile/orders");
+    } else {
+      toast.error(res.message || "Something went wrong");
     }
   };
 
@@ -92,7 +89,7 @@ export default function Checkout() {
                     label="First Name *"
                     variant="outlined"
                     fullWidth
-                    formRules={{required: true}}
+                    formRules={{ required: true }}
                   />
                   <TextFieldController
                     control={control}
@@ -101,7 +98,7 @@ export default function Checkout() {
                     label="Last Name *"
                     variant="outlined"
                     fullWidth
-                    formRules={{required: true}}
+                    formRules={{ required: true }}
                   />
                   <TextFieldController
                     control={control}
@@ -110,7 +107,7 @@ export default function Checkout() {
                     label="Phone Number *"
                     variant="outlined"
                     fullWidth
-                    formRules={{required: true}}
+                    formRules={{ required: true }}
                   />
                   <TextFieldController
                     control={control}
@@ -119,9 +116,14 @@ export default function Checkout() {
                     label="Address *"
                     variant="outlined"
                     fullWidth
-                    formRules={{required: true}}
+                    formRules={{ required: true }}
                   />
-                  <STButton type="submit" variant="contained" loading={loading} fullWidth>
+                  <STButton
+                    type="submit"
+                    variant="contained"
+                    loading={loading}
+                    fullWidth
+                  >
                     Place Order
                   </STButton>
                 </Stack>
