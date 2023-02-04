@@ -57,10 +57,8 @@ export default function CustomThemeProvider(props: PropsType) {
       }}
     >
       <ThemeProvider theme={themMode === "dark" ? darkTheme : lightTheme}>
-        <RTL isRtl={language.direction === "rtl"}>
-          <CssBaseline />
-          {props.children}
-        </RTL>
+        <CssBaseline />
+        {props.children}
       </ThemeProvider>
     </ThemeContext.Provider>
   );

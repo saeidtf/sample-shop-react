@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import debounce from "lodash/debounce";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import ProductItem from "../../components/ProductItem";
 import { useGetProductsQuery } from "../../services/productApi";
@@ -19,6 +19,13 @@ export default function Products() {
   const pageSize = Number(searchParams.get("pagesize")) || 12;
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const router = useNavigate();
+
+  useEffect(() => {    
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [page]);
 
   const {
     data: { data: { rows = [], count = 0 } = {} } = {},
@@ -71,8 +78,6 @@ export default function Products() {
         <Pagination
           count={Math.ceil(count / pageSize)}
           page={page}
-          showFirstButton
-          showLastButton
           renderItem={(item) => (
             <PaginationItem
               {...item}

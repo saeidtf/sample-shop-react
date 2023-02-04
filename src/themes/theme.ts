@@ -13,8 +13,7 @@ const lightTheme = responsiveFontSizes(createTheme({
       main: '#e91e63',
     },
   },
-  spacing: 4,  
-  direction: 'rtl',
+  spacing: 4,    
   shape: {
     borderRadius: 4,
   },
@@ -27,8 +26,7 @@ const darkTheme = responsiveFontSizes(createTheme({
   palette: {    
     mode: 'dark',    
   },
-  spacing: 4,
-  direction: 'rtl',
+  spacing: 4,  
   shape: {
     borderRadius: 4,
   },

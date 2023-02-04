@@ -7,6 +7,9 @@ import {
   Divider,
   Drawer,
   IconButton,
+  List,
+  ListItem,
+  ListItemButton,
   Stack,
   styled,
   SwipeableDrawer,
@@ -22,6 +25,14 @@ import LoginHeader from "./LoginHeader";
 
 import { HiMenu } from "react-icons/hi";
 import { selectUser } from "../../../redux/feuchers/userSlice";
+
+const links = [
+  { to: "/", label: "Home" },
+  { to: "/products", label: "Products" },
+  { to: "/contact", label: "Contact" },
+  { to: "/about", label: "About" },
+  { to: "/cart", label: "Cart" },
+];
 
 const NavLink = styled(NavLinkReact)(({ theme }) => ({
   textDecoration: "none",
@@ -45,6 +56,11 @@ export default function LayoutHeader() {
     router("/cart");
   };
 
+  const handleLogin = () => {
+    setOpenMenu(false);
+    router("/login");
+  };
+
   return (
     <>
       <AppBar
@@ -55,6 +71,11 @@ export default function LayoutHeader() {
       >
         <Toolbar>
           <Stack direction="row" alignItems="center" gap={2}>
+            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+              <IconButton color="inherit" onClick={() => setOpenMenu(true)}>
+                <HiMenu size={24} />
+              </IconButton>
+            </Box>            
             <Typography variant="h6">Online Shop</Typography>
             <IconButton color="inherit" size="large" onClick={handleGotoCart}>
               <Badge badgeContent={cart.length} color="secondary">
@@ -70,58 +91,47 @@ export default function LayoutHeader() {
             <NavLink to="/contact">Contact</NavLink>
             <NavLink to="/about">About</NavLink>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton color="inherit" onClick={() => setOpenMenu(true)}>
-              <HiMenu size={24} />
-            </IconButton>
-          </Box>
         </Toolbar>
       </AppBar>
       <SwipeableDrawer
         open={openMenu}
         onClose={() => setOpenMenu(false)}
         onOpen={() => setOpenMenu(true)}
-        anchor="right"
+        anchor="left"
       >
-        <Box
-          sx={{
-            width: 300,
-            height: "100vh",
-          }}
-          role="presentation"
-        >
+        <Box width={300} height="100vh" textAlign="center" role="presentation">
           <Stack spacing={4} mt={4}>
             <Avatar sx={{ width: 100, height: 100, m: "auto" }} />
-            {userInfo ? (
-              <Typography variant="h6" align="center">
-                {`${userInfo.name} ${userInfo.family}`}
-              </Typography>
+            {userInfo?.id ? (
+              <>
+                <Typography variant="h6" align="center">
+                  {`${userInfo.name} ${userInfo.family}`}
+                </Typography>
+                <List onClick={() => setOpenMenu(false)}>
+                  <ListItem disablePadding>
+                    <ListItemButton component={NavLink} to="/profile">
+                      <Typography variant="h6">Profile</Typography>
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </>
             ) : (
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => router("/login")}
-              >
-                Login
-              </Button>
+              <Box px={2}>
+                <Button fullWidth variant="contained" onClick={handleLogin}>
+                  Login
+                </Button>
+              </Box>
             )}
             <Divider />
-            <Box
-              sx={{ display: "flex", flexDirection: "column", gap: 2, px: 2 }}
-              onClick={() => setOpenMenu(false)}
-            >
-              {userInfo && (
-                <>
-                  <NavLink to="/profile">Profile</NavLink>
-                  <Divider />
-                </>
-              )}
-              <NavLink to="/">Home</NavLink>
-              <NavLink to="/products">Products</NavLink>
-              <NavLink to="/contact">Contact</NavLink>
-              <NavLink to="/about">About</NavLink>
-              <NavLink to="/cart">Cart</NavLink>
-            </Box>
+            <List onClick={() => setOpenMenu(false)}>
+              {links.map((link) => (
+                <ListItem key={link.to} disablePadding>
+                  <ListItemButton component={NavLink} to={link.to}>
+                    <Typography variant="h6">{link.label}</Typography>
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
           </Stack>
         </Box>
       </SwipeableDrawer>
