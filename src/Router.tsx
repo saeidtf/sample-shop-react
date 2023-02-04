@@ -1,8 +1,8 @@
 import React from "react";
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
-import {About, Cart, Checkout, Contact, Home, Login, OrderDetails, Orders, Products, Profile} from "./pages";
+import { About, Cart, Checkout, Contact, Home, Login, OrderDetails, Orders, Products, Profile } from "./pages";
 
 
 type PrivateRouteProps = {

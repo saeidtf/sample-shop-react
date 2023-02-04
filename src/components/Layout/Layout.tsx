@@ -1,9 +1,21 @@
 import { Box, Container, GlobalStyles, Stack, Typography } from "@mui/material";
-import React from "react";
-import { Outlet } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import LayoutHeader from "./components/LayoutHeader";
 
 export default function Layout() {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  useEffect(() => {
+    if (boxRef.current) {
+      boxRef.current.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }    
+  }, [location]);
+
   return (
     <>
       <GlobalStyles
@@ -12,6 +24,7 @@ export default function Layout() {
         }}
       />
       <Box
+        ref={boxRef}
         sx={{
           maxWidth: "100%",
           overflowX: "hidden",
