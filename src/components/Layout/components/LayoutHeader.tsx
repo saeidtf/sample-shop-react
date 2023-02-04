@@ -4,9 +4,7 @@ import {
   Badge,
   Box,
   Button,
-  Divider,
-  Drawer,
-  IconButton,
+  Divider, IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -14,17 +12,18 @@ import {
   styled,
   SwipeableDrawer,
   Toolbar,
-  Typography,
+  Typography
 } from "@mui/material";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link, NavLink as NavLinkReact, useNavigate } from "react-router-dom";
+import { NavLink as NavLinkReact, useNavigate } from "react-router-dom";
 import { selectCart } from "../../../redux/feuchers/cartSlice";
 import { useAppSelector } from "../../../redux/hook";
 import LoginHeader from "./LoginHeader";
 
 import { HiMenu } from "react-icons/hi";
 import { selectUser } from "../../../redux/feuchers/userSlice";
+import HideOnScroll from "./HideOnScroll";
 
 const links = [
   { to: "/", label: "Home" },
@@ -63,36 +62,33 @@ export default function LayoutHeader() {
 
   return (
     <>
-      <AppBar
-        position="static"
-        color="primary"
-        component={"nav"}
-        sx={{ flexShrink: 0 }}
-      >
-        <Toolbar>
-          <Stack direction="row" alignItems="center" gap={2}>
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
-              <IconButton color="inherit" onClick={() => setOpenMenu(true)}>
-                <HiMenu size={24} />
+      <HideOnScroll>
+        <AppBar color="primary" component={"nav"} sx={{ flexShrink: 0 }}>
+          <Toolbar>
+            <Stack direction="row" alignItems="center" gap={2}>
+              <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                <IconButton color="inherit" onClick={() => setOpenMenu(true)}>
+                  <HiMenu size={24} />
+                </IconButton>
+              </Box>
+              <Typography variant="h6">Online Shop</Typography>
+              <IconButton color="inherit" size="large" onClick={handleGotoCart}>
+                <Badge badgeContent={cart.length} color="secondary">
+                  <FaShoppingCart size={20} />
+                </Badge>
               </IconButton>
-            </Box>            
-            <Typography variant="h6">Online Shop</Typography>
-            <IconButton color="inherit" size="large" onClick={handleGotoCart}>
-              <Badge badgeContent={cart.length} color="secondary">
-                <FaShoppingCart size={20} />
-              </Badge>
-            </IconButton>
-            <LoginHeader />
-          </Stack>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box gap={4} sx={{ display: { xs: "none", md: "flex" } }}>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/products">Products</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
-            <NavLink to="/about">About</NavLink>
-          </Box>
-        </Toolbar>
-      </AppBar>
+              <LoginHeader />
+            </Stack>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box gap={4} sx={{ display: { xs: "none", md: "flex" } }}>
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="/products">Products</NavLink>
+              <NavLink to="/contact">Contact</NavLink>
+              <NavLink to="/about">About</NavLink>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
       <SwipeableDrawer
         open={openMenu}
         onClose={() => setOpenMenu(false)}

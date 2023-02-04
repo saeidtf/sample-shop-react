@@ -22,7 +22,12 @@ export default function SliderPage() {
   if (loading)
     return (
       <Box>
-        <Skeleton variant="rectangular" width={"100%"} height={600}  />
+        <Skeleton variant="rectangular" width={"100%"} sx={{
+          height:{
+            xs: 300,
+            md: 600
+          }
+        }}  />
       </Box>
     );
   if (isError) return <Box>Something went wrong</Box>;

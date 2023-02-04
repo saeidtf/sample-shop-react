@@ -56,7 +56,7 @@ export default function Checkout() {
     if (res.success) {
       dispatch(clearCart());
       toast.success("Order placed successfully");
-      router("/profile/orders");
+      router("/profile/orders",{replace:true});
     } else {
       toast.error(res.message || "Something went wrong");
     }
