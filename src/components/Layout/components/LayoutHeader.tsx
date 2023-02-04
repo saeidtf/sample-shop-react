@@ -4,7 +4,8 @@ import {
   Badge,
   Box,
   Button,
-  Divider, IconButton,
+  Divider,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -12,7 +13,7 @@ import {
   styled,
   SwipeableDrawer,
   Toolbar,
-  Typography
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
@@ -62,33 +63,31 @@ export default function LayoutHeader() {
 
   return (
     <>
-      <HideOnScroll>
-        <AppBar color="primary" component={"nav"} sx={{ flexShrink: 0 }}>
-          <Toolbar>
-            <Stack direction="row" alignItems="center" gap={2}>
-              <Box sx={{ display: { xs: "flex", md: "none" } }}>
-                <IconButton color="inherit" onClick={() => setOpenMenu(true)}>
-                  <HiMenu size={24} />
-                </IconButton>
-              </Box>
-              <Typography variant="h6">Online Shop</Typography>
-              <IconButton color="inherit" size="large" onClick={handleGotoCart}>
-                <Badge badgeContent={cart.length} color="secondary">
-                  <FaShoppingCart size={20} />
-                </Badge>
+      <AppBar position="sticky" color="primary" component={"nav"} sx={{ flexShrink: 0 }}>
+        <Toolbar>
+          <Stack direction="row" alignItems="center" gap={2}>
+            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+              <IconButton color="inherit" onClick={() => setOpenMenu(true)}>
+                <HiMenu size={24} />
               </IconButton>
-              <LoginHeader />
-            </Stack>
-            <Box sx={{ flexGrow: 1 }} />
-            <Box gap={4} sx={{ display: { xs: "none", md: "flex" } }}>
-              <NavLink to="/">Home</NavLink>
-              <NavLink to="/products">Products</NavLink>
-              <NavLink to="/contact">Contact</NavLink>
-              <NavLink to="/about">About</NavLink>
             </Box>
-          </Toolbar>
-        </AppBar>
-      </HideOnScroll>
+            <Typography variant="h6">Online Shop</Typography>
+            <IconButton color="inherit" size="large" onClick={handleGotoCart}>
+              <Badge badgeContent={cart.length} color="secondary">
+                <FaShoppingCart size={20} />
+              </Badge>
+            </IconButton>
+            <LoginHeader />
+          </Stack>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box gap={4} sx={{ display: { xs: "none", md: "flex" } }}>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/products">Products</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/about">About</NavLink>
+          </Box>
+        </Toolbar>
+      </AppBar>
       <SwipeableDrawer
         open={openMenu}
         onClose={() => setOpenMenu(false)}

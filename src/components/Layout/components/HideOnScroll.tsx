@@ -12,6 +12,8 @@ export default function HideOnScroll(props: Props) {
     target: window ? window() : undefined,
   });
 
+  console.log(trigger)
+
   return (
     <Slide appear={false} direction="down" in={!trigger}>
       {children}
