@@ -1,5 +1,7 @@
-# REACT , REDUX-TOOLKIT QUERY , TYPESCRIPT , MATERIAL-UI 
+# Sample Shop
+## REACT , REDUX-TOOLKIT QUERY , TYPESCRIPT , MATERIAL-UI 
 
+[Demo](https://petss.ir/)
 
 ## Available Scripts
 
