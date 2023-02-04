@@ -34,8 +34,8 @@ const baseQueryWithReauth: BaseQueryFn<
     (result.meta?.response?.status === 401 || result.meta?.response?.status === 403)
   ) {  
     toast.error("Your session has expired. Please login again.");
-    localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
     window.location.href = "/login";
   }
   return result;

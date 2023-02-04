@@ -29,10 +29,12 @@ export const userSlice = createSlice({
         login: (state, action: PayloadAction<UserState>) => {
             state.value = action.payload.value;
             state.token = action.payload.token;
+            localStorage.setItem("token", action.payload.token!);
         },
         logout: (state) => {
             state.value = {} as IUserInfo;
             state.token = "";
+            localStorage.removeItem("token");
         }
     }
 });

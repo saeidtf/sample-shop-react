@@ -28,8 +28,7 @@ setupListeners(store.dispatch);
 
 store.subscribe(() => {
   localStorage.setItem("cart", JSON.stringify(store.getState().cart.value));
-  localStorage.setItem("user", JSON.stringify(store.getState().user?.value));
-  localStorage.setItem("token", store.getState().user?.token || "");
+  localStorage.setItem("user", JSON.stringify(store.getState().user?.value));  
 });
 
 

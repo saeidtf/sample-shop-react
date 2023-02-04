@@ -33,8 +33,8 @@ export default function Orders() {
       isError={isError}
       loading={loading}
     >
-      <Box sx={{ width: "100%" }}>
-        <Table>
+      <Box sx={{ width: "100%" , overflowX:'auto' }}>
+        <Table sx={{minWidth:600}}>
           <TableHead>
             <TableRow>
               <TableCell>Order ID</TableCell>

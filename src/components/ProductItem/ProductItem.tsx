@@ -101,11 +101,12 @@ const ProductItem = ({ product }: ProductItemProps) => {
       sx={{
         my: 4,
         height: "100%",
+        width:'100%'
       }}
       ref={containerRef}
     >
-      <Stack justifyContent={"space-between"} sx={{ height: "100%" }}>
-        <CardMedia component="img" image={thumbnail} alt={name} />
+      <Stack justifyContent={"space-between"} sx={{ height: "100%"  , width:'100%'}}>
+        <CardMedia component="img" image={thumbnail} alt={name}/>
         <CardHeader title={name} />
         <CardContent>
           <Stack

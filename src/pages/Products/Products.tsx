@@ -18,7 +18,7 @@ export default function Products() {
   const page = Number(searchParams.get("page")) || 1;
   const pageSize = Number(searchParams.get("pagesize")) || 12;
   const [search, setSearch] = useState(searchParams.get("search") || "");
-  const router =useNavigate();
+  const router = useNavigate();
 
   const {
     data: { data: { rows = [], count = 0 } = {} } = {},
@@ -38,14 +38,14 @@ export default function Products() {
   const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearch(value);
-    router(`/products?page=1${value && `&search=${value}`}`)
+    router(`/products?page=1${value && `&search=${value}`}`);
   }, 1000);
 
   if (isError) return <Box>Error</Box>;
 
   return (
-    <Stack spacing={8}>
-      <Box mt={4}>
+    <Stack spacing={8} sx={{ width: "100%" }}>
+      <Box mt={4} sx={{ maxWidth: "100%" }}>
         <TextField
           defaultValue={search}
           onChange={handleSearch}
@@ -57,13 +57,15 @@ export default function Products() {
       </Box>
       {loading && <ProductsSkelton />}
       {!loading && (
-        <Grid container spacing={2}>
-          {rows?.map((product) => (
-            <Grid item xs={12} sm={6} md={3} lg={4} key={product.id}>
-              <ProductItem product={product} />
-            </Grid>
-          ))}
-        </Grid>
+        <Box>
+          <Grid container spacing={2} sx={{ width: "100%" }}>
+            {rows?.map((product) => (
+              <Grid item xs={12} sm={6} md={3} lg={4} key={product.id}>
+                <ProductItem product={product} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       )}
       {count && count > pageSize && (
         <Pagination

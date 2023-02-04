@@ -2,7 +2,7 @@ import { Grid, Skeleton, Stack } from "@mui/material";
 
 export default function ProductsSkelton() {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} sx={{width:'100%'}}>
       {Array.from({ length: 12 }).map((_, index) => (
         <Grid item xs={12} sm={6} md={3} lg={4} key={index}>
           <Skeleton variant="rectangular" width="100%" height={250} />
