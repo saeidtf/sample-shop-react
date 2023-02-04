@@ -17,6 +17,7 @@ export default function SliderPage() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay:true
   };
 
   if (loading)
@@ -34,7 +35,7 @@ export default function SliderPage() {
 
   return (
     <Box component={"div"}>
-      <CustomSlider {...settings} isResponsive={false}>
+      <CustomSlider {...settings} isResponsive={false} >
         {sliders.map((item) => (
           <Box key={item.id}>
             <Box display={"flex"} justifyContent="center">
