@@ -6,7 +6,10 @@ export default function AboutSmall() {
     <Card variant="outlined">
       <CardHeader title="Descriptions" sx={{ textAlign: "center" }} />
       <CardContent>
-        <Typography variant="body1" textAlign={"center"} mb={4} p={4}>
+        <Typography variant="body1" textAlign={{
+          xs: "justify",
+          md: "center",
+        }} mb={4} p={4}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
           voluptatum, quod, quia, voluptas quae voluptatem quibusdam
           necessitatibus voluptates quos quas quidem. Quisquam, quae. Quisquam
