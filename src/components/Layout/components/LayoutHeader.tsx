@@ -2,6 +2,7 @@ import {
   AppBar,
   Avatar,
   Badge,
+  BadgeProps,
   Box,
   Button,
   Divider,
@@ -24,7 +25,6 @@ import LoginHeader from "./LoginHeader";
 
 import { HiMenu } from "react-icons/hi";
 import { selectUser } from "../../../redux/feuchers/userSlice";
-import HideOnScroll from "./HideOnScroll";
 
 const links = [
   { to: "/", label: "Home" },
@@ -46,6 +46,15 @@ const NavLink = styled(NavLinkReact)(({ theme }) => ({
   },
 }));
 
+const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: -3,
+    top: 10,
+    border: `2px solid ${theme.palette.primary.main}`,
+    padding: "0 4px",
+  },
+}));
+
 export default function LayoutHeader() {
   const [openMenu, setOpenMenu] = useState(false);
   const router = useNavigate();
@@ -63,7 +72,12 @@ export default function LayoutHeader() {
 
   return (
     <>
-      <AppBar position="sticky" color="primary" component={"nav"} sx={{ flexShrink: 0 }}>
+      <AppBar
+        position="sticky"
+        color="primary"
+        component={"nav"}
+        sx={{ flexShrink: 0 }}
+      >
         <Toolbar>
           <Stack direction="row" alignItems="center" gap={2}>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -72,10 +86,10 @@ export default function LayoutHeader() {
               </IconButton>
             </Box>
             <Typography variant="h6">Online Shop</Typography>
-            <IconButton color="inherit" size="large" onClick={handleGotoCart}>
-              <Badge badgeContent={cart.length} color="secondary">
+            <IconButton aria-label="cart" color="inherit" size="large" onClick={handleGotoCart}>
+              <StyledBadge badgeContent={cart.length} color="secondary" max={99}>
                 <FaShoppingCart size={20} />
-              </Badge>
+              </StyledBadge>
             </IconButton>
             <LoginHeader />
           </Stack>
