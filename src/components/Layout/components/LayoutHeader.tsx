@@ -25,6 +25,7 @@ import LoginHeader from "./LoginHeader";
 
 import { HiMenu } from "react-icons/hi";
 import { selectUser } from "../../../redux/feuchers/userSlice";
+import HideOnScroll from "./HideOnScroll";
 
 const links = [
   { to: "/", label: "Home" },
@@ -72,61 +73,69 @@ export default function LayoutHeader() {
 
   return (
     <>
-      <AppBar
-        position="sticky"
-        color="primary"
-        component={"nav"}
-        sx={{ flexShrink: 0 }}
-      >
-        <Toolbar>
-          <Stack direction="row" alignItems="center" spacing={1} sx={{
-            width: {
-              xs: "100%",
-              md: "auto",
-            },
-          }}>
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
-              <IconButton color="inherit" onClick={() => setOpenMenu(true)}>
-                <HiMenu size={24} />
-              </IconButton>
-            </Box>
-            <Box
+      <HideOnScroll>
+        <AppBar         
+          color="primary"
+          component={"nav"}
+          sx={{ flexShrink: 0 }}
+        >
+          <Toolbar>
+            <Stack
+              direction="row"
+              alignItems="center"
+              spacing={1}
               sx={{
-                flexGrow: {
-                  xs: 1,
+                width: {
+                  xs: "100%",
+                  md: "auto",
                 },
               }}
             >
-              <Link to="/">
-                <Typography variant="h6" textAlign={"center"}>Online Shop</Typography>
-              </Link>
-            </Box>
-            <IconButton
-              aria-label="cart"
-              color="inherit"
-              size="large"
-              onClick={handleGotoCart}
-            >
-              <StyledBadge
-                badgeContent={cart.length}
-                color="secondary"
-                max={99}
+              <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                <IconButton color="inherit" onClick={() => setOpenMenu(true)}>
+                  <HiMenu size={24} />
+                </IconButton>
+              </Box>
+              <Box
+                sx={{
+                  flexGrow: {
+                    xs: 1,
+                  },
+                }}
               >
-                <FaShoppingCart size={20} />
-              </StyledBadge>
-            </IconButton>
-            <LoginHeader />
-          </Stack>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box gap={4} sx={{ display: { xs: "none", md: "flex" } }}>
-            {links.map((link) => (
-              <NavLink key={link.to} to={link.to}>
-                {link.label}
-              </NavLink>
-            ))}
-          </Box>
-        </Toolbar>
-      </AppBar>
+                <Link to="/">
+                  <Typography variant="h6" textAlign={"center"}>
+                    Online Shop
+                  </Typography>
+                </Link>
+              </Box>
+              <IconButton
+                aria-label="cart"
+                color="inherit"
+                size="large"
+                onClick={handleGotoCart}
+              >
+                <StyledBadge
+                  badgeContent={cart.length}
+                  color="secondary"
+                  max={99}
+                >
+                  <FaShoppingCart size={20} />
+                </StyledBadge>
+              </IconButton>
+              <LoginHeader />
+            </Stack>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box gap={4} sx={{ display: { xs: "none", md: "flex" } }}>
+              {links.map((link) => (
+                <NavLink key={link.to} to={link.to}>
+                  {link.label}
+                </NavLink>
+              ))}
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
       <SwipeableDrawer
         open={openMenu}
         onClose={() => setOpenMenu(false)}
